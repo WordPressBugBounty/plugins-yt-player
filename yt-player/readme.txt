@@ -1,7 +1,7 @@
 === Video Player for YouTube ===
 Contributors: bplugins, shehabulislam, freemius
 Tags: youtube, plyr, Youtube video player, youtube embed, video player
-Requires at least: 4.4
+Requires at least: 4.5
 Tested up to: 6.6.2
 Stable tag: 1.6.1
 Requires PHP: 7.1
