@@ -2,8 +2,8 @@
 Contributors: bplugins, shehabulislam, freemius
 Tags: youtube, plyr, Youtube video player, youtube embed, video player
 Requires at least: 4.5
-Tested up to: 6.6.2
-Stable tag: 1.6.1
+Tested up to: 6.7.1
+Stable tag: 1.6.2
 Requires PHP: 7.1
 Donate link: https://www.buymeacoffee.com/abuhayat
 License: GPLv3 or later
@@ -80,6 +80,10 @@ You can publish unlimited video with YT player Plugin
 4. Shortcode
 
 == Changelog ==
+
+= 1.6.2 - 28 Jan, 2025 =
+* Feature: Set Ratio
+* Update: Freemius WordPress SDK
 
 = 1.6.1 - 2 July 2024 =
 * Updated: Player library
