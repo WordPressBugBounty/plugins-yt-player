@@ -18,7 +18,7 @@ class Timeline {
         wp_localize_script( 'yt-player-video-editor-script', 'ytpPlayer',[
             'ajaxURL' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce( 'wp_ajax' ),
-            'is_premium' => (boolean) ytp_fs()->can_use_premium_code(),
+            'is_premium' => (bool) ytp_fs()->can_use_premium_code(),
         ]);
         
     }

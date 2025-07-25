@@ -220,6 +220,78 @@ class YTPlayer{
                     'type'  => 'text',
                 ),
                 array(
+                    'id' => 'brandLogo',
+                    'type' => 'switcher',
+                    'title' => 'Enable Brand Logo',
+                    'desc' => 'Turn On to display your brand logo in this video, enhancing brand visibility and recognition.',
+                    'class' => 'bplugins-meta-readonly',
+                    'default' => '0',
+                ),
+                array(
+                    'id' => 'logoSource',
+                    'title' => 'Upload Brand Logo',
+                    'type'  => 'upload',
+                    'desc' => 'Insert or Upload here brand logo for show the display in this video',
+                    'class' => 'bplugins-meta-readonly',
+                    'dependency' => array('brandLogo', '==', true),
+                ),
+                array(
+                    'id' => 'brandSize',
+                    'type' => 'dimensions',
+                    'title' => 'Brand Logo Size',
+                    'height' => false,
+                    'default' => [
+                        'unit' => 'px',
+                        'width' => 100,
+                    ],
+                    'dependency' => array('brandLogo', '==', true),
+                    'class' => 'bplugins-meta-readonly',
+                ),
+                array(
+                    'id' => 'radius',
+                    'type' => 'dimensions',
+                    'title' => 'Brand Logo Border Radius',
+                    'height' => false,
+                    'default' => [
+                        'unit' => '%',
+                        'width' => 50,
+                    ],
+                    'dependency' => array('brandLogo', '==', true),
+                    'class' => 'bplugins-meta-readonly',
+                ),
+                array(
+                    'id'      => 'brandLogoPosition',
+                    'type'    => 'select',
+                    'title'   => 'Brand Logo Position',
+                    'desc'    => 'Select the position for the brand logo overlay.',
+                    'class' => 'bplugins-meta-readonly',
+                    'options' => array(
+                      'top-left'      => 'Top Left',
+                      'top-right'     => 'Top Right',
+                      'bottom-left'   => 'Bottom Left',
+                      'bottom-right'  => 'Bottom Right',
+                      'center-center' => 'Center Center',
+                    ),
+                    'default'    => 'top-right',
+                    'dependency' => array('brandLogo', '==', true),
+                  ),
+                  array(
+                    'id' => 'customThumbnail',
+                    'type' => 'switcher',
+                    'title' => 'Enable Custom Thumbnail',
+                    'desc' => 'Turn On to display your custom thumbnail in this video, enhancing brand visibility and recognition.',
+                    'class' => 'bplugins-meta-readonly',
+                    'default' => '0',
+                ),
+                array(
+                    'id' => 'thumbnailSource',
+                    'title' => 'Upload Custom Thumbnail',
+                    'type'  => 'upload',
+                    'desc' => 'Upload here thumbnail for show the display in this video',
+                    'class' => 'bplugins-meta-readonly',
+                    'dependency' => array('customThumbnail', '==', true),
+                ),
+                array(
                     'id' => 'controls',
                     'type' => 'button_set',
                     'title' => 'Controls',
@@ -232,28 +304,17 @@ class YTPlayer{
                       'current-time' => 'Current Time',
                       'mute' => 'Mute Button',
                       'volume' => 'Volume Control',
-                      'settings' => 'Setting Button',
                       'fullscreen' => 'Fullscreen'
                     ),
-                    'default' => ['play-large', 'play', 'progress', 'duration', 'current-time','mute', 'volume', 'settings', 'fullscreen']
+                    'default' => ['play-large', 'play', 'progress', 'duration', 'current-time','mute', 'volume', 'fullscreen']
                 ),
                 array(
-                    'id' => 'width',
-                    'type' => 'dimensions',
-                    'title' => 'Player Width',
-                    'height' => false,
-                    'default' => [
-                        'unit' => '%',
-                        'width' => 100,
-                    ]
-                ),
-                array(
-                    'id' => 'startTime_ignore',
-                    'type' => 'number',
-                    'title' => 'Video Start Time',
-                    'desc' => 'Video start time in second',
+                    'id' => 'loop',
+                    'type' => 'switcher',
+                    'title' => 'Repeat',
+                    'desc' => 'On if you want the video play again after the finished duration',
                     'class' => 'bplugins-meta-readonly',
-                    'default' => '0'
+                    'default' => '0',
                 ),
                 array(
                     'id' => 'muted_ignore',
@@ -287,7 +348,7 @@ class YTPlayer{
                     'type' => 'number',
                     'title' => 'Seek Time',
                     'desc' => 'The time, in seconds, to seek when a user hits fast forward or rewind. Default value is 10 Sec.',
-                    'default' => '10',
+                    'default' => 10,
                     'class' => 'bplugins-meta-readonly',
                 ),
                 array(
@@ -306,17 +367,79 @@ class YTPlayer{
                     'default' => '1',
                 ),
                 array(
-                    'id' => 'disableContextMenu_ignore',
-                    'type' => 'switcher',
-                    'title' => 'Disable Context Menu',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => '1',
-                ),
-                array(
                     'id' => 'hideYoutubeUI_ignore',
                     'class' => 'bplugins-meta-readonly',
                     'type' => 'switcher',
                     'title' => 'Hide Youtube UI (Experimental, check it\'s working or not for you)'
+                ),
+                array(
+                    'id' => 'showThumbnailOnPause',
+                    'type' => 'switcher',
+                    'title' => 'Show Thumbnail On Pause',
+                    'desc' => 'On if you want show the thumbnail when you video on pause.',
+                    'class' => 'bplugins-meta-readonly',
+                    'default' => '0',
+                ),
+                array(
+                    'id' => 'hideControlsWhenPause',
+                    'type' => 'switcher',
+                    'title' => 'Hide Controls in Pause',
+                    'default' => '0',
+                    'class' => 'bplugins-meta-readonly',
+                ),
+                array(
+                    'id' => 'roundCorner',
+                    'type' => 'dimensions',
+                    'title' => 'Video Player Corner',
+                    'height' => false,
+                    'desc' => 'You set here the round corner for the video player.',
+                    'class' => 'bplugins-meta-readonly',
+                    'default' => [
+                        'unit' => 'px',
+                        'width' => 3,
+                    ]
+                ),
+                array(
+                    'id' => 'playButtonCorner',
+                    'type' => 'dimensions',
+                    'title' => 'Play Button Corner',
+                    'height' => false,
+                    'desc' => 'You set here the round corner for the play button.',
+                    'class' => 'bplugins-meta-readonly',
+                    'default' => [
+                        'unit' => '%',
+                        'width' => 50,
+                    ]
+                ),
+                array(
+                    'id' => 'playButtonPadding',
+                    'type' => 'dimensions',
+                    'title' => 'Padding',
+                    'height' => false,
+                    'desc' => 'You set here the padding for the play button.',
+                    'class' => 'bplugins-meta-readonly',
+                    'default' => [
+                        'unit' => 'px',
+                        'width' => 15,
+                    ]
+                ),
+                array(
+                    'id' => 'playIconSize',
+                    'type' => 'dimensions',
+                    'title' => 'Play Icon Size',
+                    'height' => false,
+                    'desc' => 'You set here the size of the play icon.',
+                    'class' => 'bplugins-meta-readonly',
+                    'default' => [
+                        'unit' => 'px',
+                        'width' => 25,
+                    ]
+                ),
+                array(
+                    'id'    => 'background',
+                    'type'  => 'color',
+                    'class' => 'bplugins-meta-readonly',
+                    'title' => 'Play Button Background',
                 )
             )
         ));

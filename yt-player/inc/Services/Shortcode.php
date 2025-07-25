@@ -28,8 +28,8 @@ class Shortcode {
         ?>
         <style>
             <?php echo esc_html("#player$selector") ?>{
-                max-width: <?php echo esc_html($width['width'].$width['unit']) ?>;
-                margin: 0 auto;
+                max-width: <?php echo esc_html($width['width'].$width['unit']) ?>
+                /* margin: 0 auto; */
             }
         </style>    
         <div>
@@ -71,8 +71,8 @@ class Shortcode {
         ?>
         <style>
             <?php echo esc_attr("#player$id"); ?>{
-                max-width: <?php echo esc_html($width); ?>;
-                margin: 0 auto;
+                max-width: <?php echo esc_html($width); ?>
+                /* margin: 0 auto */
             }
             <?php if($option['hideYoutubeUI'] == '1'){ ?>
                 <?php echo esc_attr("#player$id"); ?> iframe{

@@ -10,6 +10,12 @@
 if ( ! class_exists( 'CSF_Fields' ) ) {
   abstract class CSF_Fields extends CSF_Abstract {
 
+    public $field = array();
+    public $value = array();
+    public $unique = array();
+    public $where = array();
+    public $parent = array();
+
     public function __construct( $field = array(), $value = '', $unique = '', $where = '', $parent = '' ) {
       $this->field  = $field;
       $this->value  = $value;
@@ -17,6 +23,7 @@ if ( ! class_exists( 'CSF_Fields' ) ) {
       $this->where  = $where;
       $this->parent = $parent;
     }
+
 
     public function field_name( $nested_name = '' ) {
 

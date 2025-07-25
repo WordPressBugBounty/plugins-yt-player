@@ -1,9 +1,9 @@
 === Video Player for YouTube ===
-Contributors: bplugins, shehabulislam, freemius
+Contributors: bplugins, shehabulislam, noornabi2, abuhayat, freemius
 Tags: youtube, plyr, Youtube video player, youtube embed, video player
-Requires at least: 4.5
-Tested up to: 6.7.1
-Stable tag: 1.6.2
+Requires at least: 4.3
+Tested up to: 6.7
+Stable tag: 2.0.0
 Requires PHP: 7.1
 Donate link: https://www.buymeacoffee.com/abuhayat
 License: GPLv3 or later
@@ -13,11 +13,14 @@ A modern, accessible, fully customizable & user-friendly YouTube Video Player fo
 
 == Description ==
 
-A modern, accessable, fully customizable & user friendly YouTube Video Player for wordrpess. You can play any YouTube video in wordpress Post, Page, widget area, Other Custom Post Type and Theme template file using This plugin.
+A modern, accessible, and fully customizable YouTube Video Player for WordPress.
+
+Easily embed and play any YouTube video across your WordPress site — including posts, pages, widget areas, custom post types, and theme template files. Designed with flexibility and user experience in mind, this plugin offers a sleek, user-friendly interface and extensive customization options to match your brand and layout seamlessly.
 
 == Demo ==
  
  [Click Here To see demo](https://yt-player.bplugins.com/ "See Demo")  
+
 
 = How to Use ? =
 Watch the video below to learn how to use YT Player Plugin.
@@ -39,6 +42,18 @@ To Embed Any YouTube Video Use the ShortCode Below..
 * ShortCode driven- Add the video player to any post/page or widget using shortcode 
 * Control over every button of the player.
 * Powered by html5 
+
+
+
+= More New Super Features =
+* Brand Logo - Display Brand Logo Overlay on Video (Set the any position)
+* Custom Thumbnail - Allows users to upload and set a custom thumbnail for the video
+* Repeat - Enable or disable looping of the video after it ends
+* Show Thumbnail - Displays the thumbnail image whenever the video is paused
+* Hide Controls - Hides the video player controls when the video is paused.
+* Mini Player - Displays a mini video player that stays visible while the user scrolls the Page
+* Customizable User Interface - Provides users with flexible design options to tailor the interface for optimal usability and personalized experience.
+
 
 = Feedback = 
 Liked that plugin? Hate it? Want a new feature?  [Send me some feedback](mailto: support@bplugins.com "Send feedback")  
@@ -80,6 +95,10 @@ You can publish unlimited video with YT player Plugin
 4. Shortcode
 
 == Changelog ==
+
+= 2.0.0 - 25 july, 2025 =
+* More New Featured Added
+* Update: Freemius Wordpress SDK
 
 = 1.6.2 - 28 Jan, 2025 =
 * Feature: Set Ratio

@@ -5,7 +5,7 @@ class Presets {
 
     protected $table_name = 'yt_player_presets';
 
-    public function createOrUpdate($args ){
+    public function createOrUpdate($args){
         global $wpdb;
         $table_name = $wpdb->prefix.$this->table_name;
 

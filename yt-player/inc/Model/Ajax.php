@@ -19,6 +19,7 @@ class Ajax{
         add_action('wp_ajax_ytp_import_data', [$this, 'ytp_import_data']);
 
         add_action('wp_ajax_ytp_ajax', [$this, 'prepareAjax']);
+        add_action('wp_ajax_nopriv_ytp_ajax', [$this, 'prepareAjax']);
     }
 
     public static function instance(){
@@ -36,6 +37,7 @@ class Ajax{
     }
 
     public function prepareAjax(){
+        // wp_send_json_success('success');
         if(isset($_GET['nonce'])){
             $this->params = $_GET;
             $this->requestType = 'POST';

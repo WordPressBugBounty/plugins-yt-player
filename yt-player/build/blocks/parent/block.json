@@ -1,0 +1,24 @@
+{
+  "apiVersion": "1",
+  "name": "yt-player/parent",
+  "title": "Youtube Player Container",
+  "icon": "format-video",
+  "category": "media",
+  "keywords": [
+    "Youtube Player Container",
+    "Youtube Player"
+  ],
+  "supports": {
+    "inserter": false,
+    "reusable": false,
+    "html": false
+  },
+  "attributes": {},
+  "example": {
+    "attributes": {
+      "preview": true
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css"
+}
