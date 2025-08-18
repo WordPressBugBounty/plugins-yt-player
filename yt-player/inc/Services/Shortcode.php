@@ -68,10 +68,13 @@ class Shortcode {
         Ob_start(); 
         $option['controls'] = $option['controls']; //array_diff($option['controls'], ['restart', 'rewind', 'fast-forward', 'current-time']);
         $width = $option['width']['width']. $option['width']['unit'];
+       
+        wp_enqueue_style('ytp-style');
+        wp_enqueue_script('ytp-frontend');
         ?>
         <style>
             <?php echo esc_attr("#player$id"); ?>{
-                max-width: <?php echo esc_html($width); ?>
+                width: <?php echo esc_html($width); ?>
                 /* margin: 0 auto */
             }
             <?php if($option['hideYoutubeUI'] == '1'){ ?>
@@ -83,7 +86,7 @@ class Shortcode {
             <?php } ?>
         </style>
         <div>
-            <div id="player<?php echo esc_attr($id); ?>">
+            <div id="player<?php echo esc_attr($id); ?>" class="ytp-player" data-options="<?php echo esc_attr(wp_json_encode(['controls' => array_values($option['controls'])])) ?>">
                 <div class="plyr__video-embed embed-container" id="player">
                     <iframe
                         src="https://www.youtube.com/embed/<?php echo $option['source']; ?>"
@@ -92,12 +95,7 @@ class Shortcode {
                         allow="autoplay"
                     ></iframe>
                 </div>
-                <script type="text/javascript">
-                    const player<?php echo esc_html($id); ?> = new Plyr('#player<?php echo esc_html($id); ?> #player', {
-                        controls:<?php echo wp_json_encode(array_values($option['controls'])) ?>,
-                        youtube: { noCookie: false, rel: 0, showinfo: 0, iv_load_policy: 3, modestbranding: 1, start: 0} //pro 
-                    });
-                </script>
+               
             </div>
         </div>
         <?php $output=ob_get_clean(); return $output; 

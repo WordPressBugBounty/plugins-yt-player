@@ -22,6 +22,25 @@ class Utils{
         return $result ;
     }
 
+    public static function get_option($key){
+        $option = get_option($key);
+        return function($key, $default = null, $is_boolean = false, $key2 = null) use ($option) {
+            if (isset($option[$key]) && $option[$key] != '') {
+                $result =  $option[$key];
+            } else {
+                $result = $default;
+            }
+
+            if ($key2 && isset($option[$key2])) {
+                $result = $option[$key2];
+            }
+            if ($is_boolean) {
+                return  $result == '1';
+            }
+            return $result;
+        };
+    }
+
     /**
      * get array value from option table
      */

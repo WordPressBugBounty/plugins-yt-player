@@ -10,6 +10,7 @@ class YTPlayer{
      */
     public function register(){
         add_action('init', [$this, 'init']);
+        add_action('init', [$this, 'register_field'], 0);
         if ( is_admin() ) {
             add_filter( 'post_row_actions', [$this, 'remove_row_actions'], 10, 2 );
             add_action('edit_form_after_title', [$this, 'edit_form_after_title']);
@@ -22,25 +23,31 @@ class YTPlayer{
             add_filter( 'gettext', [$this, 'pdfp_change_publish_button'], 10, 2 );
 
             add_filter( 'admin_footer_text',[$this, 'ytp_admin_footer']);
+
             
             // add_filter( 'filter_block_editor_meta_boxes', [$this, 'remove_metabox'] );
             // add_action('use_block_editor_for_post', [$this, 'forceGutenberg'], 10, 2);
 
-            if (class_exists('\CSF')) {
-                $prefix = '_ytp';
-                \CSF::createMetabox($prefix, array(
-                    'title' => 'Configure Your Video Player',
-                    'post_type' => 'ytplayer',
-                    // 'data_type' => 'unserialize',
-                ));
-    
-                $this->configure($prefix);
-                // $this->controls();
-                // $this->branding();
-                // $this->endscreen();
-            }
+            
         }
     }
+
+    function register_field(){
+        if (class_exists('\CSF')) {
+            $prefix = '_ytp';
+            \CSF::createMetabox($prefix, array(
+                'title' => 'Configure Your Video Player',
+                'post_type' => 'ytplayer',
+                // 'data_type' => 'unserialize',
+            ));
+
+            $this->configure($prefix);
+            // $this->controls();
+            // $this->branding();
+            // $this->endscreen();
+        }
+    }
+
 
     function ytp_admin_footer( $text ) {
         if ( 'ytplayer' == get_post_type() ) {
@@ -333,10 +340,9 @@ class YTPlayer{
                     'default' => '',
                 ),
                 array(
-                    'id' => 'width_ignore',
+                    'id' => 'width',
                     'type' => 'dimensions',
                     'title' => 'Player Width',
-                    'class' => 'bplugins-meta-readonly',
                     'height' => false,
                     'default' => [
                         'unit' => '%',

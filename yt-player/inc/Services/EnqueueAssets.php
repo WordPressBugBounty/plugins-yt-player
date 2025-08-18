@@ -26,8 +26,9 @@ class EnqueueAssets {
     public function publicAssets(){
         // Have to uncomment this for shortcode view
         
-        // wp_enqueue_style( 'ytp-style', YTP_PLUGIN_DIR . 'public/css/plyr-v3.7.8.css', array(), YTP_PLUGIN_VERSION, 'all' );
-        // wp_enqueue_script( 'ytp-js', YTP_PLUGIN_DIR  . 'public/js/plyr-v3.7.8.js',YTP_PLUGIN_VERSION, false );
+        wp_enqueue_style( 'ytp-style', YTP_PLUGIN_DIR . 'public/css/plyr-v3.7.8.css', array(), YTP_PLUGIN_VERSION, 'all' );
+        wp_enqueue_script( 'ytp-js', YTP_PLUGIN_DIR  . 'public/js/plyr-v3.7.8.js',[], YTP_PLUGIN_VERSION, false );
+        wp_enqueue_script( 'ytp-frontend', YTP_PLUGIN_DIR  . 'build/frontend.js', ['ytp-js'], YTP_PLUGIN_VERSION, false );
     }
 
 }

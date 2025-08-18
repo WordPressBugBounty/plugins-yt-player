@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Layout from '../../Layout/Layout';
 import { helpItem } from '../../utils/options';
 import VideoPlayer from './VideoPlayer';
-const Video = ({ videoUrl = "https://www.youtube.com/watch?v=NGvVtSXcZK4", isYoutube = true }) => {
+const Video = ({ videoUrl = "https://youtu.be/AymY7iObfJk?si=tvXDGJ4cm6MHNQ6a", isYoutube = true }) => {
   const [isChangeLog, setIsChangeLog] = useState(false);
 
   const handleCreateNewPage = (e) => {
@@ -28,7 +28,7 @@ const Video = ({ videoUrl = "https://www.youtube.com/watch?v=NGvVtSXcZK4", isYou
                   <h1>Welcome to Video Player for YouTube</h1>
                   <p>Check out our simple video tutorial that guides you through using this plugin step-by-step!</p>
                   <div className="img">
-                    <VideoPlayer src={videoUrl} width="100%" height="100%" isYoutube={isYoutube} />
+                    <VideoPlayer src={videoUrl} width="100%" height='100%' isYoutube={isYoutube} />
 
                   </div>
                 </div>

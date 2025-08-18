@@ -1,11 +1,10 @@
-=== Video Player for YouTube ===
+=== YT Player - A fully customizable Video Player for YouTube ===
 Contributors: bplugins, shehabulislam, noornabi2, abuhayat, freemius
-Tags: youtube, plyr, Youtube video player, youtube embed, video player
-Requires at least: 4.3
-Tested up to: 6.7
-Stable tag: 2.0.0
+Tags: plyr, Youtube video player, youtube embed, video player, YouTube
+Requires at least: 6.5+
+Tested up to: 6.8.1
+Stable tag: 2.0.1
 Requires PHP: 7.1
-Donate link: https://www.buymeacoffee.com/abuhayat
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,62 +12,69 @@ A modern, accessible, fully customizable & user-friendly YouTube Video Player fo
 
 == Description ==
 
-A modern, accessible, and fully customizable YouTube Video Player for WordPress.
+[YT Player](https://bplugins.com/products/yt-player/) | [Documentation](https://bplugins.com/docs/yt-player) | [Pricing](https://bplugins.com/products/yt-player/#pricing) | [Support](https://bplugins.com/support/) | [Demo](https://bplugins.com/products/yt-player/#demos)
 
-Easily embed and play any YouTube video across your WordPress site — including posts, pages, widget areas, custom post types, and theme template files. Designed with flexibility and user experience in mind, this plugin offers a sleek, user-friendly interface and extensive customization options to match your brand and layout seamlessly.
+[YT Player](https://bplugins.com/products/yt-player/) is a modern, lightweight, and fully customizable YouTube video player built for WordPress. Whether you're adding a single video or creating a video-rich experience across posts, pages, or widget areas, this plugin makes it easy to embed YouTube videos with a sleek, accessible interface powered by HTML5 and the Plyr framework.
 
-== Demo ==
- 
- [Click Here To see demo](https://yt-player.bplugins.com/ "See Demo")  
+Use a simple shortcode to embed YouTube videos without needing iframe codes. Ideal for bloggers, marketers, educators, and anyone looking to add YouTube video to WordPress effortlessly.
 
+=== Key Features –  Free Version ===
 
-= How to Use ? =
-Watch the video below to learn how to use YT Player Plugin.
+- **Easy YouTube Embed with Shortcode** - Paste your YouTube URL inside [ytp]...[/ytp] and place it anywhere — posts, pages, sidebars, or custom templates. No embed code needed.
+- **Works with YouTube Video ID or URL** - Just add the full YouTube link to start playing — no extra setup required.
+- **Fully Responsive Layout** - The player adjusts automatically to fit any screen size — desktop, tablet, or mobile.
+- **Fullscreen Support** - Viewers can switch to full-screen mode, with support for both native and fallback options.
+- **Fast & Lightweight** - Optimized for speed — the player loads quickly and doesn't slow down your page.
+- **Shortcode Anywhere** - Use the shortcode in posts, pages, widget areas, or custom post types to display your video wherever you want.
+- **Toggle Player Controls** - Choose which controls to show or hide, like play, pause, volume, or fullscreen — you’re in control.
+- **Keyboard & Accessibility Support** - Built with accessibility in mind, making navigation easier for all users.
+- **Built with HTML5 and Plyr.js** - Uses the modern HTML5 video standard and the Plyr framework for reliable, consistent playback.
 
-https://www.youtube.com/watch?v=NGvVtSXcZK4
+=== YT Player Pro– Unlock Premium Features ===
 
-= ShortCode =
-To Embed Any YouTube Video Use the ShortCode Below..
-<pre>[ytp]YouTube Video URL[/ytp] </pre>
-* Video URL must be formatted like that: https://www.youtube.com/watch?v=NGvVtSXcZK4
+The [Pro version](https://bplugins.com/products/yt-player/#pricing) offers more control over playback and appearance, giving you greater flexibility in how videos are displayed and customized.
 
+- **Add a Brand Logo on Videos** -  Display your logo as an overlay on the video. You can adjust its position, size, and transparency.
+- **Upload Custom Thumbnails** -  Replace the default YouTube preview with your own image to better match your content or branding.
+- **Auto-Repeat Playback** -  Let your video loop automatically after it ends — ideal for promos or background video.
+- **Show Thumbnail When Paused** -  When the video is paused, a thumbnail image appears instead of a blank screen.
+- **Hide Controls on Pause** -  Create a cleaner look by hiding all controls when the video isn’t playing.
+- **Floating Mini Player While Scrolling** -  Keep the video visible in a small corner player as visitors scroll down the page.
+- **Muted** - Starts video playback with audio turned off by default.
+- **Auto Play** - Automatically starts video playback when the page loads.
+- **Seek Time** - Defines the time interval (in seconds) to skip forward or backward during video playback.
+- **Hide YouTube UI** - Removes default YouTube player controls and branding for a cleaner, distraction-free viewing experience.
+- **Save Preset Design** - Allows users to save customized settings and styles as a preset for quick reuse across multiple layout.
+- **Customize the Player’s Look** -  Fine-tune the player’s appearance — colors, controls, and layout — to match your website style.
 
-= Features =
-* Play any Youtube video by using the video ID
-* No need to use embed code. 
-* Responsive - works with any screen size.
-* Fullscreen - supports native fullscreen with fallback to "full window" modes
-* Lite weight and super fast performance. 
-* ShortCode driven- Add the video player to any post/page or widget using shortcode 
-* Control over every button of the player.
-* Powered by html5 
-
-
-
-= More New Super Features =
-* Brand Logo - Display Brand Logo Overlay on Video (Set the any position)
-* Custom Thumbnail - Allows users to upload and set a custom thumbnail for the video
-* Repeat - Enable or disable looping of the video after it ends
-* Show Thumbnail - Displays the thumbnail image whenever the video is paused
-* Hide Controls - Hides the video player controls when the video is paused.
-* Mini Player - Displays a mini video player that stays visible while the user scrolls the Page
-* Customizable User Interface - Provides users with flexible design options to tailor the interface for optimal usability and personalized experience.
+[Try the Pro Version](https://bplugins.com/products/yt-player/#pricing) – Unlock all premium features today!
 
 
-= Feedback = 
-Liked that plugin? Hate it? Want a new feature?  [Send me some feedback](mailto: support@bplugins.com "Send feedback")  
+===How to Use YT Player – Quick Start Guide===
 
+Getting started is easy!
 
-== Installation ==
+https://youtu.be/NGvVtSXcZK4
 
-This section describes how to install the plugin and get it working.
+[Live Demo](https://bplugins.com/products/yt-player/#demos) | [Try the Pro](https://bplugins.com/products/yt-player/#pricing)
 
-E.g
+=== This plugin is ideal for ===
 
-1. Upload `plugin-directory` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Use shortcode in page, post or in widgets.
-4. If you want video in your theme php file, Place `<?php echo do_shortcode('YOUR_SHORTCODE'); ?>` in your templates
+- Video bloggers and vloggers
+- Online courses and educators
+- Marketing landing pages
+- Portfolio sites
+- News & magazine layouts
+- Anyone who wants a custom YouTube embed player
+
+=== Check out our other WordPress Plugins ===
+- [HTML5 Audio Player](https://bplugins.com/products/html5-audio-player/) – Best audio player plugin for WordPress.
+
+- [PDF Poster](https://bplugins.com/products/pdf-poster/) – A fully-featured PDF Viewer Plugin for WordPress.
+
+- [StreamCast](https://bplugins.com/products/streamcast-radio-player/) – A fully-featured Radio Player Plugin for WordPress.
+
+- [3D Viewer](https://bplugins.com/products/3d-viewer/) – Display interactive 3D models on the webs.
 
 
 == Frequently Asked Questions ==
@@ -90,11 +96,23 @@ You can publish unlimited video with YT player Plugin
 == Screenshots ==
 
 1. The player in frontend
-2. Sidebar Menu
-3. Player Setup
-4. Shortcode
+2. The player with all controls
+3. The player without controls
+4. Player with Timeline
+5. Player with brand logo
+6. Shortcode
+7. Control settings
+8. Control settings
+9. SideBar Menu
+10. Player Setup
+11. Preview
+
 
 == Changelog ==
+
+= 2.0.1 - 18 Aug, 2025 =
+* Update: Dashboard preview tabbed description
+* Update: Added upgrade button on dashboard
 
 = 2.0.0 - 25 july, 2025 =
 * More New Featured Added

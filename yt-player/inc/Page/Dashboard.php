@@ -17,7 +17,7 @@ class Dashboard{
   }
 
   public function admin_menu(){
-      add_submenu_page( 'edit.php?post_type=ytplayer', 'Dashboard', 'Dashboard', 'manage_options', 'dashboard', [$this, 'dashboard_page_callback'],0 );
+      add_submenu_page( 'edit.php?post_type=ytplayer', 'Help & Support', 'Help & Support', 'manage_options', 'dashboard', [$this, 'dashboard_page_callback'],0 );
   }
 
 

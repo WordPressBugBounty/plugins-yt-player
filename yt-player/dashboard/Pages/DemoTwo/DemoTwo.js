@@ -51,7 +51,7 @@ const DemoTwo = () => {
               {category && <span className='category'>{category}</span>}
             </div>
 
-            {isActive && <div className='externalIcon'>{externalIcon}</div>}
+            {/* {isActive && <div className='externalIcon'>{externalIcon}</div>} */}
           </button>
         })}
       </div>

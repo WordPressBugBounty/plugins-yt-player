@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Video Player for YouTube 2.0.0\n"
+"Project-Id-Version: Video Player for YouTube 2.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yt-player-new\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-25T02:43:52+00:00\n"
+"POT-Creation-Date: 2025-08-18T17:07:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ytp\n"
@@ -43,38 +43,59 @@ msgstr ""
 msgid "Watch Tutorial"
 msgstr ""
 
-#: inc/Page/Settings.php:38
+#: inc/Page/Settings.php:48
 msgid "[ytp] YouTube Video URL [/ytp]"
 msgstr ""
 
-#: inc/PostType/YTPlayer.php:109
-#: inc/PostType/YTPlayerPro.php:105
+#: inc/PostType/YTPlayer.php:116
+#: inc/PostType/YTPlayerPro.php:148
 msgid "WP Podcast"
 msgstr ""
 
-#: inc/PostType/YTPlayer.php:110
-#: inc/PostType/YTPlayerPro.php:106
+#: inc/PostType/YTPlayer.php:117
+#: inc/PostType/YTPlayerPro.php:149
 msgid "Supports"
 msgstr ""
 
-#: inc/PostType/YTPlayer.php:113
-#: inc/PostType/YTPlayerPro.php:109
+#: inc/PostType/YTPlayer.php:120
+#: inc/PostType/YTPlayerPro.php:152
 msgid "Shortcode"
 msgstr ""
 
-#: inc/PostType/YTPlayer.php:114
-#: inc/PostType/YTPlayerPro.php:110
+#: inc/PostType/YTPlayer.php:121
+#: inc/PostType/YTPlayerPro.php:153
 msgid "Copy and paste this shortcode into your posts, pages and widget:"
 msgstr ""
 
-#: inc/PostType/YTPlayer.php:118
-#: inc/PostType/YTPlayerPro.php:114
+#: inc/PostType/YTPlayer.php:125
+#: inc/PostType/YTPlayerPro.php:157
 msgid "Template Include"
 msgstr ""
 
-#: inc/PostType/YTPlayer.php:119
-#: inc/PostType/YTPlayerPro.php:115
+#: inc/PostType/YTPlayer.php:126
+#: inc/PostType/YTPlayerPro.php:158
 msgid "Copy and paste the PHP code into your template file:"
+msgstr ""
+
+#: inc/PostType/YTPlayerPro.php:50
+msgid "Please show some love"
+msgstr ""
+
+#: inc/PostType/YTPlayerPro.php:67
+#, php-format
+msgid "If you like <strong>%s</strong> Plugin, please leave us a <a href=\"%s\" target=\"_blank\" style=\"color: #0073aa; text-decoration: none;\">★★★★★ rating</a>."
+msgstr ""
+
+#: inc/PostType/YTPlayerPro.php:72
+msgid "Your review is very important to us as it helps us to grow more."
+msgstr ""
+
+#: inc/PostType/YTPlayerPro.php:76
+msgid "Need some improvement?"
+msgstr ""
+
+#: inc/PostType/YTPlayerPro.php:81
+msgid "Please let me know how I can improve the plugin."
 msgstr ""
 
 #: build/blocks/timeline/view.js:1

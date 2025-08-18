@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(function(){document.querySelectorAll(".ytp-player").forEach((function(e){const t=e.getAttribute("id"),o=JSON.parse(e.dataset.options);console.log(t,o),new Plyr(`#${t} .plyr__video-embed`,{...o,youtube:{}})}))}));
