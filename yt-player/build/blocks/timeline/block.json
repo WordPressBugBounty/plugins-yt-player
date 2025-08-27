@@ -1,14 +1,14 @@
 {
-  "apiVersion": "1",
+  "apiVersion": "2",
   "name": "yt-player/timeline",
   "title": "Video player timeline for youtube ",
   "description": "video player timeline for youtube",
   "category": "media",
   "icon": "video-alt2",
   "keywords": [
-    "Video player timeline for youtube",
-    "Media Player",
-    "Video"
+    "video player timeline for youtube",
+    "media player",
+    "video"
   ],
   "textdomain": "ytp",
   "attributes": {

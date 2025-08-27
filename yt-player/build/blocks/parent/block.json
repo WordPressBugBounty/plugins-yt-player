@@ -1,12 +1,12 @@
 {
-  "apiVersion": "1",
+  "apiVersion": "2",
   "name": "yt-player/parent",
   "title": "Youtube Player Container",
   "icon": "format-video",
   "category": "media",
   "keywords": [
-    "Youtube Player Container",
-    "Youtube Player"
+    "youtube player container",
+    "youtube player"
   ],
   "supports": {
     "inserter": false,

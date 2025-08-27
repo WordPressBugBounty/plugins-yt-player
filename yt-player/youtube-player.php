@@ -17,7 +17,7 @@ if (!class_exists('YTPPlugin')) {
 
         function onInit()
         {
-            register_block_type(__DIR__ . '/build/blocks/youtube-player');
+            // register_block_type(__DIR__ . '/build/blocks/youtube-player');
             register_block_type(__DIR__ . '/build/blocks/video');
             register_block_type(__DIR__ . '/build/blocks/timeline');
             register_block_type(__DIR__ . '/build/blocks/parent');

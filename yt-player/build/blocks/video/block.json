@@ -1,14 +1,14 @@
 {
-  "apiVersion": "1",
+  "apiVersion": "2",
   "name": "yt-player/video",
   "title": "Video player for youtube",
   "description": "video player for youtube",
   "category": "media",
   "icon": "video-alt2",
   "keywords": [
-    "Video player for youtube",
-    "Media Player",
-    "Video"
+    "video player for youtube",
+    "media player",
+    "video"
   ],
   "textdomain": "ytp",
   "attributes": {
@@ -56,7 +56,7 @@
         }
       }
     },
-    "BrandBorder": {
+    "brandBorder": {
       "type": "object",
       "default": {
         "radius": "50%"

@@ -35,7 +35,7 @@ $block = [
                 "mobile" => $meta('brandSize', 100, false, 'width') . $meta('brandSize', 'px', false, 'unit')
             ]
         ],
-        "BrandBorder" => [
+        "brandBorder" => [
             "radius" => $meta('radius', 50, false, 'width') . $meta('radius', '%', false, 'unit')
         ],
 
