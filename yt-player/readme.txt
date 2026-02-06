@@ -1,9 +1,9 @@
-=== YT Player - A fully customizable Video Player for YouTube ===
+=== YT Player – Embed and Customize Video Players ===
 Contributors: bplugins, shehabulislam, noornabi2, abuhayat, freemius
 Tags: plyr, Youtube video player, youtube embed, video player, YouTube
-Requires at least: 6.5+
+Requires at least: 6.2+
 Tested up to: 6.8.1
-Stable tag: 2.0.2
+Stable tag: 2.0.6
 Requires PHP: 7.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -12,7 +12,7 @@ A modern, accessible, fully customizable & user-friendly YouTube Video Player fo
 
 == Description ==
 
-[YT Player](https://bplugins.com/products/yt-player/) | [Documentation](https://bplugins.com/docs/yt-player) | [Pricing](https://bplugins.com/products/yt-player/#pricing) | [Support](https://bplugins.com/support/) | [Demo](https://bplugins.com/products/yt-player/#demos)
+[YT Player](https://bplugins.com/products/yt-player/) | [Documentation](https://bplugins.com/docs/yt-player) | [Pricing](https://bplugins.com/products/yt-player/pricing/) | [Support](https://bplugins.com/support/) | [Demo](https://bplugins.com/products/yt-player/#demos)
 
 [YT Player](https://bplugins.com/products/yt-player/) is a modern, lightweight, and fully customizable YouTube video player built for WordPress. Whether you're adding a single video or creating a video-rich experience across posts, pages, or widget areas, this plugin makes it easy to embed YouTube videos with a sleek, accessible interface powered by HTML5 and the Plyr framework.
 
@@ -32,7 +32,7 @@ Use a simple shortcode to embed YouTube videos without needing iframe codes. Ide
 
 === YT Player Pro– Unlock Premium Features ===
 
-The [Pro version](https://bplugins.com/products/yt-player/#pricing) offers more control over playback and appearance, giving you greater flexibility in how videos are displayed and customized.
+The [Pro version](https://bplugins.com/products/yt-player/pricing/) offers more control over playback and appearance, giving you greater flexibility in how videos are displayed and customized.
 
 - **Add a Brand Logo on Videos** -  Display your logo as an overlay on the video. You can adjust its position, size, and transparency.
 - **Upload Custom Thumbnails** -  Replace the default YouTube preview with your own image to better match your content or branding.
@@ -47,7 +47,7 @@ The [Pro version](https://bplugins.com/products/yt-player/#pricing) offers more 
 - **Save Preset Design** - Allows users to save customized settings and styles as a preset for quick reuse across multiple layout.
 - **Customize the Player’s Look** -  Fine-tune the player’s appearance — colors, controls, and layout — to match your website style.
 
-[Try the Pro Version](https://bplugins.com/products/yt-player/#pricing) – Unlock all premium features today!
+[Try the Pro Version](https://bplugins.com/products/yt-player/pricing/) – Unlock all premium features today!
 
 
 ===How to Use YT Player – Quick Start Guide===
@@ -56,7 +56,7 @@ Getting started is easy!
 
 https://youtu.be/NGvVtSXcZK4
 
-[Live Demo](https://bplugins.com/products/yt-player/#demos) | [Try the Pro](https://bplugins.com/products/yt-player/#pricing)
+[Live Demo](https://bplugins.com/products/yt-player/#demos) | [Try the Pro](https://bplugins.com/products/yt-player/pricing/)
 
 === This plugin is ideal for ===
 
@@ -91,6 +91,10 @@ You can play any YouTube video.
 
 You can publish unlimited video with YT player Plugin
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the Video Player for YouTube plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/9e5fb62e-ed95-4c9a-b8cf-ecfa91845532). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 
 
 == Screenshots ==
@@ -109,6 +113,19 @@ You can publish unlimited video with YT player Plugin
 
 
 == Changelog ==
+
+= 2.0.6 - 21 Jan, 2026 =
+* Vulnerability patch problem fixed
+
+= 2.0.5 - 11 Dec, 2025 =
+* freemius sdk version updated
+
+= 2.0.4 - 6 Nov, 2025 =
+* Video input field working both, ID or URL.
+
+= 2.0.3 - 28 Oct, 2025 =
+* Update: Update Freemius WordPress SDK
+* Added a New Features 
 
 = 2.0.2 - 27 Aug, 2025 =
 * Update: Yt Player Admin Bug Fixed

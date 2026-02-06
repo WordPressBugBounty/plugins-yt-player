@@ -25,10 +25,25 @@ class YTPlayer{
             add_filter( 'admin_footer_text',[$this, 'ytp_admin_footer']);
 
             
-            // add_filter( 'filter_block_editor_meta_boxes', [$this, 'remove_metabox'] );
-            // add_action('use_block_editor_for_post', [$this, 'forceGutenberg'], 10, 2);
+            add_filter( 'filter_block_editor_meta_boxes', [$this, 'remove_metabox'] );
+            add_action('use_block_editor_for_post', [$this, 'forceGutenberg'], 10, 2);
+
+            add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_scripts']);
 
             
+        }
+    }
+
+    public function enqueue_admin_scripts() {
+        global $typenow;
+        if ($typenow === 'ytplayer') { 
+            wp_enqueue_script(
+                'ytp-admin-copy',
+                YTP_PLUGIN_DIR . '/dashboard/post.js',
+                ['jquery'],
+                '1.0',
+                true
+            );
         }
     }
 
@@ -140,11 +155,24 @@ class YTPlayer{
         return $defaults;
     }
 
-    function column_content($column_name, $post_ID) {
-        if ($column_name == 'shortcode') {
-            echo '<div class="ytp_front_shortcode"><input style="text-align: center; border: none; outline: none; background-color: #1e8cbe; color: #fff; padding: 4px 10px; border-radius: 3px;" value="[ytplayer id='. esc_attr($post_ID) . ']" ><span class="htooltip">Copy To Clipboard</span></div>';
-        }
+    function column_content($column_name, $post_ID)
+{
+    if ($column_name == 'shortcode') {
+        echo '
+        <div id="bPlAdminShortcode-' . esc_attr($post_ID) . '" class="ytp_front_shortcode" style="position: relative; display: inline-block;">
+            <input 
+                readonly 
+                style="text-align: center; border: none; outline: none; background-color: #1e8cbe; color: #fff; padding: 4px 10px; border-radius: 3px; cursor: pointer;" 
+                value="[ytplayer id=' . esc_attr($post_ID) . ']" 
+                onclick="copyBPlAdminShortcode(' . esc_attr($post_ID) . ')" 
+            />
+            <span class="tooltip" style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); background: #000; color: #fff; padding: 3px 6px; border-radius: 3px; font-size: 12px; visibility: hidden; opacity: 0; transition: opacity 0.3s;">
+                Copy to Clipboard
+            </span>
+        </div>';
     }
+}
+    
     
     function updated_messages( $messages ) {
         $messages[$this->post_type][1] = __('updated ');
@@ -219,12 +247,13 @@ class YTPlayer{
     public function configure($prefix){
         \CSF::createSection($prefix, array(
             // 'parent' => 'ytp_playerio',
-            'title' => ' ',
+            'title' => '',
             'fields' => array(
                 array(
                     'id' => 'source',
                     'title' => 'Video URL/ID',
                     'type'  => 'text',
+                    'desc' => 'Please submit here YouTube video URL or ID'
                 ),
                 array(
                     'id' => 'brandLogo',

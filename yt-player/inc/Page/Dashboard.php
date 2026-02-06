@@ -17,15 +17,16 @@ class Dashboard{
   }
 
   public function admin_menu(){
-      add_submenu_page( 'edit.php?post_type=ytplayer', 'Help & Support', 'Help & Support', 'manage_options', 'dashboard', [$this, 'dashboard_page_callback'],0 );
+      add_submenu_page( 'edit.php?post_type=ytplayer', 'Demo & Help', 'Demo & Help', 'manage_options', 'dashboard', [$this, 'dashboard_page_callback'],0 );
   }
 
 
   function dashboard_page_callback() {
       ?>
-          <div id="ytplYtPlayerDashboard" data-ispremium="<?php echo ytp_fs()->can_use_premium_code()?>">
-
-          </div>
-      <?php
-  }
+          <div id="ytPlayerDashboard"
+                data-info="<?php echo esc_attr(wp_json_encode([
+                'version'=>YTP_PLUGIN_VERSION,
+                'isPremium' => ytp_fs()->can_use_premium_code()
+              ]))?>"></div>
+      <?php }
 }

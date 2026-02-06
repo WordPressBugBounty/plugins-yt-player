@@ -9,16 +9,13 @@ class Init {
             PostType\YTPlayer::class,
             Base\Initialize::class,
             Page\Settings::class,
-            // Page\HowTo::class,
             Services\Shortcode::class,
             Services\CommonShortcode::class,
             Services\EnqueueAssets::class,
             Base\EnqueueAssets::class,
             Model\Ajax::class,
-            // Block\Video::class,
-            // Block\Timeline::class,
             Database\Init::class,
-            Base\Presets::class,
+            Base\Presets::class
         ];
     }
 

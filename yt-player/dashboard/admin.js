@@ -1,11 +1,10 @@
-import { createRoot } from 'react-dom/client';
-import AppContainer from './Index';
-import './admin.scss';
+import React from 'react-dom';
+import '../../bpl-tools/Admin/style.scss';
+import App from './App';
+import { dashboardInfo } from './utils/data';
 document.addEventListener('DOMContentLoaded', () => {
-  const adminEl = document.getElementById('ytplYtPlayerDashboard');
-  const isPremium = adminEl.dataset.ispremium === '1' ? true : false;
+  const adminEl = document.getElementById("ytPlayerDashboard");
+  const info = JSON.parse(adminEl.dataset.info)
 
-  
-  createRoot(adminEl).render(<AppContainer isPremium={isPremium} />);
-  adminEl.removeAttribute('data-ispremium'); // Clean up the attribute after use
+  React.createRoot(adminEl).render(<App {...dashboardInfo(info)} />)
 });
