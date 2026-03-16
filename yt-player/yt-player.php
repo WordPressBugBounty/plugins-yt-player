@@ -4,7 +4,7 @@
  * Plugin Name: Video Player for YouTube
  * Plugin URI:  http://bplugins.com
  * Description: A simple, accessible, fully customizable & user friendly YouTube Video Player for Wordpress.
- * Version: 2.0.6
+ * Version: 2.0.7
  * Author: bPlugins
  * Author URI: http://abuhayatpolash.com
  * License: GPLv3
@@ -27,23 +27,24 @@ if ( function_exists( 'ytp_fs' ) ) {
                 // Include Freemius SDK.
                 require_once dirname( __FILE__ ) . '/freemius/start.php';
                 $ytp_fs = fs_dynamic_init( array(
-                    'id'             => '5836',
-                    'slug'           => 'yt-player',
-                    'type'           => 'plugin',
-                    'public_key'     => 'pk_829fc74e7bb67d3d555c68048933d',
-                    'is_premium'     => false,
-                    'has_addons'     => false,
-                    'has_paid_plans' => true,
-                    'trial'          => array(
+                    'id'               => '5836',
+                    'slug'             => 'yt-player',
+                    'type'             => 'plugin',
+                    'public_key'       => 'pk_829fc74e7bb67d3d555c68048933d',
+                    'is_premium'       => false,
+                    'has_addons'       => false,
+                    'has_paid_plans'   => true,
+                    'trial'            => array(
                         'days'               => 7,
                         'is_require_payment' => true,
                     ),
-                    'menu'           => array(
+                    'menu'             => array(
                         'slug'       => 'edit.php?post_type=ytplayer',
                         'first-path' => 'edit.php?post_type=ytplayer&page=dashboard',
                         'support'    => false,
                     ),
-                    'is_live'        => true,
+                    'is_live'          => true,
+                    'is_org_compliant' => true,
                 ) );
             }
             return $ytp_fs;
@@ -57,7 +58,7 @@ if ( function_exists( 'ytp_fs' ) ) {
     /*Some Set-up*/
     define( 'YTP_PLUGIN_DIR', plugin_dir_url( __FILE__ ) );
     define( 'YTP_DIR_PATH', plugin_dir_path( __FILE__ ) );
-    define( 'YTP_PLUGIN_VERSION', ( $_SERVER['HTTP_HOST'] === 'localhost' ? time() : '2.0.6' ) );
+    define( 'YTP_PLUGIN_VERSION', ( $_SERVER['HTTP_HOST'] === 'localhost' ? time() : '2.0.7' ) );
     define( 'YTP_IMPORT_VER', '1.0.0' );
     if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
         require_once dirname( __FILE__ ) . '/vendor/autoload.php';

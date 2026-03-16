@@ -84,11 +84,14 @@ class YTPlayer{
     public function init(){
         register_post_type( 'ytplayer',
             array(
+                'label' => __('YT Player'),
                 'labels' => array(
                     'name' => __( 'YT Players'),
                     'singular_name' => __( 'YT Player' ),
-                    'add_new' => __( 'Add New Player' ),
-                    'add_new_item' => __( 'Add new' ),
+                    'menu_name' => __('YT Player'),
+                    'all_items' => __('ShortCode Generator'),
+                    'add_new' => __('Add New ShortCode'),
+                    'add_new_item' => __( 'Add new shortCode' ),
                     'edit_item' => __( 'Edit' ),
                     'new_item' => __( 'New' ),
                     'view_item' => __( 'View' ),

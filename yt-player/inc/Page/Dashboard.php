@@ -26,7 +26,9 @@ class Dashboard{
           <div id="ytPlayerDashboard"
                 data-info="<?php echo esc_attr(wp_json_encode([
                 'version'=>YTP_PLUGIN_VERSION,
-                'isPremium' => ytp_fs()->can_use_premium_code()
+                'isPremium' => ytp_fs()->can_use_premium_code(),
+                'hasPro'               => ytp_fs()->is_premium(),
+                'licenseActiveNonce'   => wp_create_nonce('bPlLicenseActivation'),
               ]))?>"></div>
       <?php }
 }
