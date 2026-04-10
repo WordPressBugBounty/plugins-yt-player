@@ -1,0 +1,10 @@
+{
+  "developer_id": "2229",
+  "plugin_id": "5836",
+  "public_key": "pk_dbfa20eb9d89fc1518d0500ae4332",
+  "secret_key": "sk_∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙",
+  "slug": "yt-player",
+  "pluginName": "Video Player for YouTube",
+  "textDomain": "ytp",
+  "pluginMainFile": "yt-player.php"
+}
