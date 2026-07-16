@@ -1,5 +1,5 @@
 <?php
-namespace YTP\Helper;
+namespace YTP\Helper; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 class Utils{
 

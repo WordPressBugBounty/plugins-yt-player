@@ -1,5 +1,5 @@
 <?php
-namespace YTP\Page;
+namespace YTP\Page; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 class Dashboard{
 
   public function register(){
@@ -17,7 +17,7 @@ class Dashboard{
   }
 
   public function admin_menu(){
-      add_submenu_page( 'edit.php?post_type=ytplayer', 'Demo & Help', 'Demo & Help', 'manage_options', 'dashboard', [$this, 'dashboard_page_callback'],0 );
+      add_submenu_page( 'edit.php?post_type=ytplayer', 'Demo & Help', 'Demo & Help', 'manage_options', 'dashboard', [$this, 'dashboard_page_callback'], 15 );
   }
 
 
@@ -29,6 +29,7 @@ class Dashboard{
                 'isPremium' => ytp_fs()->can_use_premium_code(),
                 'hasPro'               => ytp_fs()->is_premium(),
                 'licenseActiveNonce'   => wp_create_nonce('bPlLicenseActivation'),
+                'adminUrl'             => admin_url(),
               ]))?>"></div>
       <?php }
 }

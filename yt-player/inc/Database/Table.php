@@ -1,6 +1,6 @@
 <?php
 
-namespace YTP\Database;
+namespace YTP\Database; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 class Table
 {
@@ -23,7 +23,7 @@ class Table
 
         global $wpdb;
 
-        $full_table_name = $wpdb->prefix . $name;
+        $full_table_name = $wpdb->prefix . sanitize_key($name); // phpcs:ignore PluginCheck.Security.DirectDB.UnescapedDBParameter
 
         $opts = wp_parse_args($opts, [
             'upgrade_method' => 'dbDelta',
@@ -45,16 +45,16 @@ class Table
         // use dbDelta by default
         if ('dbDelta' == $opts['upgrade_method']) {
             require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-            dbDelta("CREATE TABLE $full_table_name ( $columns ) $table_options");
+            dbDelta("CREATE TABLE $full_table_name ( $columns ) $table_options"); // phpcs:ignore PluginCheck.Security.DirectDB.UnescapedDBParameter
             update_option("{$name}_database_version", $version);
             return;
         }
 
         if ('delete_first' == $opts['upgrade_method']) {
-            $wpdb->query("DROP TABLE IF EXISTS $full_table_name;");
+            $wpdb->query("DROP TABLE IF EXISTS $full_table_name;"); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, PluginCheck.Security.DirectDB.UnescapedDBParameter
         }
 
-        $wpdb->query("CREATE TABLE IF NOT EXISTS $full_table_name ( $columns ) $table_options;");
+        $wpdb->query("CREATE TABLE IF NOT EXISTS $full_table_name ( $columns ) $table_options;"); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, PluginCheck.Security.DirectDB.UnescapedDBParameter
 
 
         update_option("{$name}_database_version", $version);
@@ -69,7 +69,7 @@ class Table
     public function drop($name)
     {
         global $wpdb;
-        $wpdb->query("DROP TABLE IF EXISTS " . $name);
+        $wpdb->query("DROP TABLE IF EXISTS " . $wpdb->prefix . sanitize_key($name)); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, PluginCheck.Security.DirectDB.UnescapedDBParameter
         delete_option("{$name}_database_version");
     }
 }

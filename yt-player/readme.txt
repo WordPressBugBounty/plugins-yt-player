@@ -2,8 +2,8 @@
 Contributors: bplugins, shehabulislam, noornabi2, abuhayat, freemius
 Tags: plyr, Youtube video player, youtube embed, video player, YouTube
 Requires at least: 6.5+
-Tested up to: 6.9.3
-Stable tag: 2.0.8
+Tested up to: 7.0
+Stable tag: 2.0.9
 Requires PHP: 7.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -114,6 +114,13 @@ Please report security bugs found in the source code of the Video Player for You
 
 == Changelog ==
 
+= 2.0.9 - 16 July, 2026 =
+- **Update**: Freemius SDK update.
+- **Fixed**: Plugin dashboard activation issue.
+- **Added**: WP Utils added.
+- **Fixed**: Editor block selected issue.
+
+
 = 2.0.8 - 2 April, 2026 =
 - **Fixed**: Dashboard license activation issue fixed.
 - **Update**: freemius sdk version updated.
@@ -178,3 +185,8 @@ Please report security bugs found in the source code of the Video Player for You
 
 = 1.0 =
 * Initial Release
+
+== Upgrade Notice ==
+
+= 2.0.9 - 16 July, 2026 =
+- Update: Freemius SDK and WP Utils added; fixed plugin dashboard activation and editor block selection issues.

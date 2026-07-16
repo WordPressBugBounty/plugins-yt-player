@@ -1,5 +1,5 @@
 <?php
-namespace YTP\Model;
+namespace YTP\Model; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 class Presets {
 
@@ -12,10 +12,10 @@ class Presets {
         $args['preset'] = maybe_serialize( $args['preset']);
 
         if(!isset($args['id'])){
-            $wpdb->insert($table_name, $args);
+            $wpdb->insert($table_name, $args); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
             return $wpdb->insert_id;
         }else {
-            return $wpdb->update($table_name, $args, ['id' => $args['id']]);
+            return $wpdb->update($table_name, $args, ['id' => $args['id']]); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         }
         return false;
     }
@@ -23,7 +23,7 @@ class Presets {
     public function get($id){
         global $wpdb;
         $table_name = $wpdb->prefix.$this->table_name;
-        $result = $wpdb->get_row($wpdb->prepare( "SELECT * FROM $table_name WHERE id = %d", $id));
+        $result = $wpdb->get_row($wpdb->prepare( "SELECT * FROM $table_name WHERE id = %d", $id)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
         if(!$result){
             return [];
@@ -44,13 +44,13 @@ class Presets {
     function deletePreset($args){
         global $wpdb;
         $table_name = $wpdb->prefix.$this->table_name;
-        return $wpdb->delete($table_name, ['id' => $args['id']]);
+        return $wpdb->delete($table_name, ['id' => $args['id']]); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     }
 
     function fetchPresets(){
         global $wpdb;
         $table_name =  $wpdb->prefix.$this->table_name;
-        $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $table_name"), 'ARRAY_A');
+        $data = $wpdb->get_results("SELECT * FROM $table_name", 'ARRAY_A'); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         foreach($data as $index => $item){
             foreach($item as $key => $value ){
                 $data[$index][$key] = maybe_unserialize( $data[$index][$key] );

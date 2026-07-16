@@ -1,5 +1,5 @@
 <?php
-namespace YTP\Services;
+namespace YTP\Services; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 use YTP\Helper\Utils;
 
@@ -24,6 +24,7 @@ class Shortcode {
         
         $width = Utils::getOptionDeep('ytp_option','width',['width' => 100, 'unit' => '%']);
         $controls = Utils::getOptionDeep('ytp_option', 'controls', []);
+        $hideYoutubeUI = Utils::getOptionDeep('ytp_option', 'hideYoutubeUI', false);
         
         ?>
         <style>
@@ -31,6 +32,13 @@ class Shortcode {
                 max-width: <?php echo esc_html($width['width'].$width['unit']) ?>
                 /* margin: 0 auto; */
             }
+            <?php if($hideYoutubeUI){ ?>
+                <?php echo esc_html("#player$selector"); ?> .plyr__video-wrapper iframe{
+                    position: absolute !important;
+                    top: -50% !important;
+                    height: 200% !important;
+                }
+            <?php } ?>
         </style>    
         <div>
             <div id="player<?php echo esc_attr($selector); ?>">
@@ -60,6 +68,15 @@ class Shortcode {
             'id' => null,
         ), $atts ) ); 
 
+        if (empty($id)) {
+            return false;
+        }
+
+        $post = get_post($id);
+        if ($post && has_blocks($post->post_content)) {
+            return do_blocks($post->post_content);
+        }
+
         $option = get_post_meta($id, '_ytp', true);
         if(!is_array($option)){
             return false;
@@ -77,19 +94,31 @@ class Shortcode {
                 width: <?php echo esc_html($width); ?>
                 /* margin: 0 auto */
             }
-            <?php if($option['hideYoutubeUI'] == '1'){ ?>
-                <?php echo esc_attr("#player$id"); ?> iframe{
-                    position: absolute;
-                    top: -50%;
-                    height: 200%;
+            <?php if(isset($option['hideYoutubeUI']) && $option['hideYoutubeUI']){ ?>
+                <?php echo esc_attr("#player$id"); ?> .plyr__video-wrapper iframe{
+                    position: absolute !important;
+                    top: -50% !important;
+                    height: 200% !important;
                 }
             <?php } ?>
         </style>
         <div>
-            <div id="player<?php echo esc_attr($id); ?>" class="ytp-player" data-options="<?php echo esc_attr(wp_json_encode(['controls' => array_values($option['controls'])])) ?>">
+            <?php 
+                $data_options = [
+                    'controls' => isset($option['controls']) && is_array($option['controls']) ? array_values($option['controls']) : [],
+                    'hideControls' => isset($option['hideControls']) ? (bool) $option['hideControls'] : true,
+                    'seekTime' => isset($option['seekTime']) ? (int) $option['seekTime'] : 10,
+                    'clickToPlay' => isset($option['clickToPlay']) ? (bool) $option['clickToPlay'] : true,
+                    'disableContextMenu' => isset($option['disableContextMenu']) ? (bool) $option['disableContextMenu'] : true,
+                    'autoplay' => isset($option['autoplay']) ? (bool) $option['autoplay'] : false,
+                    'muted' => isset($option['muted']) ? (bool) $option['muted'] : false,
+                    'loop' => ['active' => isset($option['loop']) ? (bool) $option['loop'] : false]
+                ];
+            ?>
+            <div id="player<?php echo esc_attr($id); ?>" class="ytp-player" data-options="<?php echo esc_attr(wp_json_encode($data_options)) ?>">
                 <div class="plyr__video-embed embed-container" id="player">
                     <iframe
-                        src="https://www.youtube.com/embed/<?php echo $option['source']; ?>"
+                        src="https://www.youtube.com/embed/<?php echo esc_attr($option['source']); ?>"
                         allowfullscreen
                         allowtransparency
                         allow="autoplay"

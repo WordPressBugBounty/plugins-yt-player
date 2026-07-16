@@ -1,5 +1,5 @@
 <?php
-namespace YTP\Database;
+namespace YTP\Database; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 use YTP\Database\Table;
 

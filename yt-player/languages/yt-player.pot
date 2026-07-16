@@ -1,0 +1,502 @@
+# Copyright (C) 2026 bPlugins
+# This file is distributed under the GPLv3.
+msgid ""
+msgstr ""
+"Project-Id-Version: Video Player for YouTube 2.0.9\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/yt-player\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-07-16T10:44:50+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: yt-player\n"
+
+#. Plugin Name of the plugin
+#: yt-player.php
+msgid "Video Player for YouTube"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: yt-player.php
+msgid "http://bplugins.com"
+msgstr ""
+
+#. Description of the plugin
+#: yt-player.php
+msgid "A simple, accessible, fully customizable & user friendly YouTube Video Player for Wordpress."
+msgstr ""
+
+#. Author of the plugin
+#: yt-player.php
+msgid "bPlugins"
+msgstr ""
+
+#. Author URI of the plugin
+#: yt-player.php
+msgid "http://abuhayatpolash.com"
+msgstr ""
+
+#: inc/Page/Settings.php:48
+msgid ""
+"<div style=\"background-color: #e9eaec; padding: 15px 20px; margin-bottom: 20px; border-radius: 4px;\">\r\n"
+"                            <div style=\"display: flex; align-items: center; gap: 15px; margin-bottom: 10px;\">\r\n"
+"                                <code id=\"ytp-quick-shortcode\" style=\"background: #ffffff; padding: 6px 12px; border: 1px solid #3567d6; color: #3567d6; font-size: 14px; border-radius: 2px;\">[ytp]Your Video URL[/ytp]</code>\r\n"
+"                                <button type=\"button\" style=\"background: transparent; border: none; cursor: pointer; padding: 0; color: #1e1e1e; display: flex; align-items: center;\" onclick=\"var codeEl = document.getElementById('ytp-quick-shortcode'); navigator.clipboard.writeText('[ytp]Your Video URL[/ytp]').then(function(){ var oldText = codeEl.innerText; codeEl.innerText = 'Copied!'; setTimeout(function(){ codeEl.innerText = oldText; }, 2000); });\" title=\"Copy to clipboard\">\r\n"
+"                                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\" ry=\"2\"></rect><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\"></path></svg>\r\n"
+"                                </button>\r\n"
+"                            </div>\r\n"
+"                            <span style=\"font-size: 14px; color: #3c434a; display: block;\">Simply copy the shortcode above and place your YouTube video URL between the <strong>[ytp]</strong> and <strong>[/ytp]</strong> tags. You can paste it in any post or page.</span>\r\n"
+"                        </div>"
+msgstr ""
+
+#. translators: 1: Review URL
+#: inc/PostType/YTPlayer.php:75
+#, php-format
+msgid "If you like <strong>YT Player</strong> please leave us a <a href=\"%1$s\" target=\"_blank\">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. Your Review is very important to us as it helps us to grow more. "
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:92
+#: inc/PostType/YTPlayer.php:95
+#: inc/PostType/YTPlayer.php:96
+#: inc/PostType/YTPlayerPro.php:112
+#: inc/PostType/YTPlayerPro.php:115
+#: inc/PostType/YTPlayerPro.php:116
+msgid "YT Player"
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:94
+#: inc/PostType/YTPlayerPro.php:114
+msgid "YT Players"
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:97
+#: inc/PostType/YTPlayerPro.php:117
+msgid "ShortCode Generator"
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:98
+#: inc/PostType/YTPlayerPro.php:118
+msgid "Add New ShortCode"
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:99
+#: inc/PostType/YTPlayerPro.php:119
+msgid "Add new shortCode"
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:100
+#: inc/PostType/YTPlayerPro.php:120
+#: src/blocks/video/Components/Backend/Settings/Settings.js:236
+msgid "Edit"
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:101
+#: inc/PostType/YTPlayerPro.php:121
+msgid "New"
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:102
+#: inc/PostType/YTPlayerPro.php:122
+msgid "View"
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:103
+#: inc/PostType/YTPlayerPro.php:123
+msgid "Search"
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:104
+#: inc/PostType/YTPlayerPro.php:124
+msgid "Sorry, we couldn't find any item you are looking for."
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:145
+#: inc/PostType/YTPlayerPro.php:165
+msgid "Copy and paste this shortcode into your posts, pages and widget"
+msgstr ""
+
+#: inc/PostType/YTPlayer.php:192
+#: inc/PostType/YTPlayerPro.php:210
+msgid "updated "
+msgstr ""
+
+#: inc/PostType/YTPlayerPro.php:65
+msgid "Please show some love"
+msgstr ""
+
+#. translators: 1: Plugin name, 2: Review URL
+#: inc/PostType/YTPlayerPro.php:83
+#, php-format
+msgid "If you like <strong>%1$s</strong> Plugin, please leave us a <a href=\"%2$s\" target=\"_blank\" style=\"color: #0073aa; text-decoration: none;\">★★★★★ rating</a>."
+msgstr ""
+
+#: inc/PostType/YTPlayerPro.php:88
+msgid "Your review is very important to us as it helps us to grow more."
+msgstr ""
+
+#: inc/PostType/YTPlayerPro.php:92
+msgid "Need some improvement?"
+msgstr ""
+
+#: inc/PostType/YTPlayerPro.php:97
+msgid "Please let me know how I can improve the plugin."
+msgstr ""
+
+#: src/blocks/components/tabs/general/TimeLineItems.js:33
+msgid "Timeline Items"
+msgstr ""
+
+#: src/blocks/components/tabs/general/TimeLineItems.js:41
+#: src/blocks/components/tabs/general/TimeLineItems.js:42
+#: src/blocks/components/tabs/general/VideoSetting.js:16
+#: src/blocks/components/tabs/general/VideoSetting.js:17
+msgid "Video Source"
+msgstr ""
+
+#: src/blocks/components/tabs/general/TimeLineItems.js:48
+#: src/blocks/components/tabs/general/VideoSetting.js:29
+msgid "Youtube Video Thumbnail"
+msgstr ""
+
+#: src/blocks/components/tabs/general/TimeLineItems.js:50
+#: src/blocks/components/tabs/general/VideoSetting.js:28
+msgid "Video Thumbnail"
+msgstr ""
+
+#: src/blocks/components/tabs/general/TimeLineItems.js:55
+#: src/blocks/components/tabs/general/VideoSetting.js:39
+msgid "Video Position"
+msgstr ""
+
+#: src/blocks/components/tabs/general/TimeLineItems.js:65
+#: src/blocks/components/tabs/general/VideoSetting.js:61
+msgid "Border"
+msgstr ""
+
+#: src/blocks/components/tabs/general/TimeLineItems.js:68
+#: src/blocks/components/tabs/general/VideoSetting.js:67
+msgid "Border Radius"
+msgstr ""
+
+#: src/blocks/components/tabs/general/TimeLineItems.js:105
+msgid "No Item Found"
+msgstr ""
+
+#: src/blocks/components/tabs/general/TimeLineItems.js:110
+msgid "Add New"
+msgstr ""
+
+#: src/blocks/components/tabs/general/VideoSetting.js:79
+msgid "Title"
+msgstr ""
+
+#: src/blocks/components/tabs/general/VideoSetting.js:80
+msgid "Enter Title"
+msgstr ""
+
+#: src/blocks/components/tabs/general/VideoSetting.js:91
+msgid "Content"
+msgstr ""
+
+#: src/blocks/components/tabs/general/VideoSetting.js:92
+msgid "Enter Content"
+msgstr ""
+
+#: src/blocks/parent/index.js:59
+msgid "Choose a video type to get started."
+msgstr ""
+
+#: src/blocks/parent/index.js:60
+msgid "Choose a Video Type"
+msgstr ""
+
+#: src/blocks/parent/index.js:68
+msgid "Single Video"
+msgstr ""
+
+#: src/blocks/parent/index.js:76
+msgid "Timeline"
+msgstr ""
+
+#: src/blocks/Preset/BControls.js:56
+msgid "Controls"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:22
+msgid "Settings"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:40
+msgid "Repeat"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:51
+msgid "Autoplay"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:61
+msgid "Muted"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:71
+msgid "Show thumbnail on pause"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:81
+msgid "Auto Hide Control"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:104
+msgid "Seek Time"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:124
+msgid "Hide youtube UI (Experimental)"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:133
+msgid "Hide controls in pause"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:162
+#: src/blocks/timeline/Components/Backend/Settings/Settings.js:102
+#: src/blocks/video/utils/options.js:5
+msgid "Style"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:167
+msgid "Round Corners"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:172
+msgid "Large Play Button Style"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:180
+msgid "Corner Round"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:190
+msgid "Padding"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:198
+msgid "Icon Size"
+msgstr ""
+
+#: src/blocks/Preset/Options.js:207
+#: src/blocks/Preset/Watermark.js:30
+msgid "Background"
+msgstr ""
+
+#: src/blocks/Preset/Preset.js:112
+msgid "Preset"
+msgstr ""
+
+#: src/blocks/Preset/Preset.js:113
+msgid "Type Preset Name"
+msgstr ""
+
+#: src/blocks/Preset/Preset.js:130
+msgid "Update"
+msgstr ""
+
+#: src/blocks/Preset/Preset.js:130
+msgid "Create"
+msgstr ""
+
+#: src/blocks/Preset/Watermark.js:10
+msgid "Watermark"
+msgstr ""
+
+#: src/blocks/Preset/Watermark.js:13
+msgid "watermark"
+msgstr ""
+
+#: src/blocks/Preset/Watermark.js:21
+msgid "Text"
+msgstr ""
+
+#: src/blocks/Preset/Watermark.js:26
+msgid "Color"
+msgstr ""
+
+#: src/blocks/Preset/Watermark.js:34
+msgid "Position"
+msgstr ""
+
+#: src/blocks/timeline/Components/Backend/Settings/Settings.js:42
+#: src/blocks/video/Components/Backend/Settings/Settings.js:101
+msgid "Copied"
+msgstr ""
+
+#: src/blocks/timeline/Components/Backend/Settings/Settings.js:51
+#: src/blocks/video/Components/Backend/Settings/Settings.js:110
+msgid "Copied!"
+msgstr ""
+
+#: src/blocks/timeline/Components/Backend/Settings/Settings.js:52
+#: src/blocks/video/Components/Backend/Settings/Settings.js:110
+msgid "Copy Shortcode"
+msgstr ""
+
+#: src/blocks/timeline/Components/Backend/Settings/Settings.js:71
+msgid "Timeline videos items"
+msgstr ""
+
+#: src/blocks/timeline/Components/Backend/Settings/Settings.js:109
+msgid "Row Gap"
+msgstr ""
+
+#: src/blocks/timeline/Components/Backend/Settings/Settings.js:116
+msgid "Column Gap"
+msgstr ""
+
+#: src/blocks/timeline/Components/Backend/Settings/Settings.js:121
+msgid "Title Typography:"
+msgstr ""
+
+#: src/blocks/timeline/Components/Backend/Settings/Settings.js:127
+msgid "Title Color:"
+msgstr ""
+
+#: src/blocks/timeline/Components/Backend/Settings/Settings.js:138
+msgid "Content Typography:"
+msgstr ""
+
+#: src/blocks/timeline/Components/Backend/Settings/Settings.js:144
+msgid "Content Color:"
+msgstr ""
+
+#: src/blocks/timeline/Components/Panel/VideoBox.js:9
+msgid "Type here heading"
+msgstr ""
+
+#: src/blocks/timeline/Components/Panel/VideoBox.js:14
+msgid "Type here content"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:124
+#: src/blocks/video/utils/options.js:4
+msgid "General"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:128
+msgid "Video source"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:155
+msgid "Brand Logo URL"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:156
+msgid "Insert or upload brand logo"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:193
+msgid "Thumbnail URL"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:194
+msgid "Insert or upload Thumbnail"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:215
+msgid "Presets"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:248
+msgid "Delete"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:257
+msgid "Unknown Name"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:298
+msgid "Additional"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:302
+msgid "Additional ID"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:309
+msgid "Additional CSS"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:322
+msgid "General Styles"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:330
+msgid "Width"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:338
+msgid "Brand Logo Styles"
+msgstr ""
+
+#: src/blocks/video/Components/Backend/Settings/Settings.js:364
+msgid "Brand Logo Size:"
+msgstr ""
+
+#: src/blocks/parent/block.json
+msgctxt "block title"
+msgid "Youtube Player Container"
+msgstr ""
+
+#: src/blocks/parent/block.json
+msgctxt "block keyword"
+msgid "youtube player container"
+msgstr ""
+
+#: src/blocks/parent/block.json
+msgctxt "block keyword"
+msgid "youtube player"
+msgstr ""
+
+#: src/blocks/timeline/block.json
+msgctxt "block title"
+msgid "Video player timeline for youtube "
+msgstr ""
+
+#: src/blocks/timeline/block.json
+msgctxt "block description"
+msgid "video player timeline for youtube"
+msgstr ""
+
+#: src/blocks/timeline/block.json
+msgctxt "block keyword"
+msgid "video player timeline for youtube"
+msgstr ""
+
+#: src/blocks/timeline/block.json
+#: src/blocks/video/block.json
+msgctxt "block keyword"
+msgid "media player"
+msgstr ""
+
+#: src/blocks/timeline/block.json
+#: src/blocks/video/block.json
+msgctxt "block keyword"
+msgid "video"
+msgstr ""
+
+#: src/blocks/video/block.json
+msgctxt "block title"
+msgid "Video player for youtube"
+msgstr ""
+
+#: src/blocks/video/block.json
+msgctxt "block description"
+msgid "video player for youtube"
+msgstr ""
+
+#: src/blocks/video/block.json
+msgctxt "block keyword"
+msgid "video player for youtube"
+msgstr ""

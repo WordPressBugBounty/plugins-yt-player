@@ -1,5 +1,5 @@
 <?php
-namespace YTP\Services;
+namespace YTP\Services; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 class EnqueueAssets {
     
@@ -12,8 +12,8 @@ class EnqueueAssets {
         $page = get_current_screen();
 
         if($page->post_type === 'ytplayer' || $page->base === 'plugins'){
-            wp_enqueue_style('ytp-admin', YTP_PLUGIN_DIR.'admin/assets/css/style.css', [], YTP_PLUGIN_VERSION);
-            wp_enqueue_script('ytp-admin', YTP_PLUGIN_DIR.'admin/assets/js/script.js', [], YTP_PLUGIN_VERSION);
+            wp_enqueue_style('ytp-admin', YTP_PLUGIN_DIR.'assets/css/admin.css', [], YTP_PLUGIN_VERSION);
+            wp_enqueue_script('ytp-admin', YTP_PLUGIN_DIR.'assets/js/script.js', [], YTP_PLUGIN_VERSION, true);
 
             wp_localize_script( 'ytp-admin', 'ytpAdmin', [
                 'ajaxUrl' => admin_url('admin-ajax.php'),
@@ -27,8 +27,8 @@ class EnqueueAssets {
         // Have to uncomment this for shortcode view
         
         wp_enqueue_style( 'ytp-style', YTP_PLUGIN_DIR . 'public/css/plyr-v3.7.8.css', array(), YTP_PLUGIN_VERSION, 'all' );
-        wp_enqueue_script( 'ytp-js', YTP_PLUGIN_DIR  . 'public/js/plyr-v3.7.8.js',[], YTP_PLUGIN_VERSION, false );
-        wp_enqueue_script( 'ytp-frontend', YTP_PLUGIN_DIR  . 'build/frontend.js', ['ytp-js'], YTP_PLUGIN_VERSION, false );
+        wp_enqueue_script( 'ytp-js', YTP_PLUGIN_DIR  . 'public/js/plyr-v3.7.8.js',[], YTP_PLUGIN_VERSION, true );
+        wp_enqueue_script( 'ytp-frontend', YTP_PLUGIN_DIR  . 'build/frontend.js', ['ytp-js'], YTP_PLUGIN_VERSION, true );
     }
 
 }

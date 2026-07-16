@@ -1,6 +1,6 @@
 <?php
 
-namespace YTP\Services;
+namespace YTP\Services; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 
 class CommonShortcode {

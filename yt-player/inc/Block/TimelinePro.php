@@ -1,5 +1,5 @@
 <?php
-namespace YTP\Block;
+namespace YTP\Block; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 use YTP\Model\Presets;
 
@@ -24,6 +24,10 @@ class Timeline {
     }
 
     public function render($attrs){
+        if (!ytp_fs()->can_use_premium_code()) {
+            return '<div style="display: flex; justify-content: center; padding: 50px 0;"><span style="padding: 12px 24px; background: #00b2ff; color: #fff; border-radius: 4px; font-size: 16px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">Sorry, it\'s a premium block</span></div>';
+        }
+
         $presetModel = new Presets();
         extract($attrs);
 
@@ -33,7 +37,6 @@ class Timeline {
         ob_start(); ?>
 
         <div class="timelineBlock" data-attributes="<?php echo esc_attr(wp_json_encode($attrs)) ?>">timelineBlock</div>
-
 
         <?php return ob_get_clean();
     }

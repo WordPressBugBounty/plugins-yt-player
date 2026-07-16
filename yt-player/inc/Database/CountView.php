@@ -1,6 +1,6 @@
 <?php
 
-namespace YTP\Database;
+namespace YTP\Database; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 class CountViews
 {

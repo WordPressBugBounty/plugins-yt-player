@@ -1,5 +1,5 @@
 <?php
-namespace YTP\PostType;
+namespace YTP\PostType; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 class YTPlayer{
     protected static $_instance = null;
@@ -39,7 +39,7 @@ class YTPlayer{
         if ($typenow === 'ytplayer') { 
             wp_enqueue_script(
                 'ytp-admin-copy',
-                YTP_PLUGIN_DIR . '/dashboard/post.js',
+                YTP_PLUGIN_DIR . 'build/post.js',
                 ['jquery'],
                 '1.0',
                 true
@@ -51,11 +51,15 @@ class YTPlayer{
         if (class_exists('\CSF')) {
             $prefix = '_ytp';
             \CSF::createMetabox($prefix, array(
-                'title' => 'Configure Your Video Player',
+                'title'     => 'YouTube Player Options',
                 'post_type' => 'ytplayer',
-                // 'data_type' => 'unserialize',
+                'data_type' => 'serialize',
+                'context'   => 'normal',
+                'priority'  => 'high',
+                'nav'       => 'normal',
+                'theme'     => 'light',
             ));
-
+            
             $this->configure($prefix);
             // $this->controls();
             // $this->branding();
@@ -66,8 +70,9 @@ class YTPlayer{
 
     function ytp_admin_footer( $text ) {
         if ( 'ytplayer' == get_post_type() ) {
-            $url = 'https://wordpress.org/support/plugin/yt-player/reviews/?filter=5#new-post';
-            $text = sprintf( __( 'If you like <strong>YT Player</strong> please leave us a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. Your Review is very important to us as it helps us to grow more. ', 'post-carousel' ), $url );
+            $url = 'https://wordpress.org/support/plugin/yt-player/reviews/#new-post';
+            /* translators: 1: Review URL */
+            $text = sprintf( wp_kses_post( __( 'If you like <strong>YT Player</strong> please leave us a <a href="%1$s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. Your Review is very important to us as it helps us to grow more. ', 'yt-player' ) ), esc_url( $url ) );
             ?>
             <style>
                 .bplugins-meta-readonly { /* pointer-events: none; */ opacity: 0.6; } .csf-field.bplugins-meta-readonly:hover::after { display: block; } .csf-field.bplugins-meta-readonly::before { display: block; width: 100%; height: 100%; content: ""; position: absolute; z-index: 999; overflow: hidden; top: 0; left: 0; } .csf-field.bplugins-meta-readonly::after { display: none; content: "The option is available in the pro version only"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999999; font-size: 22px; background: #673ab7; color: #fff; padding: 10px 13px; border-radius: 3px; }
@@ -84,31 +89,36 @@ class YTPlayer{
     public function init(){
         register_post_type( 'ytplayer',
             array(
-                'label' => __('YT Player'),
+                'label' => __('YT Player', 'yt-player'),
                 'labels' => array(
-                    'name' => __( 'YT Players'),
-                    'singular_name' => __( 'YT Player' ),
-                    'menu_name' => __('YT Player'),
-                    'all_items' => __('ShortCode Generator'),
-                    'add_new' => __('Add New ShortCode'),
-                    'add_new_item' => __( 'Add new shortCode' ),
-                    'edit_item' => __( 'Edit' ),
-                    'new_item' => __( 'New' ),
-                    'view_item' => __( 'View' ),
-                    'search_items'       => __( 'Search'),
-                    'not_found' => __( 'Sorry, we couldn\'t find any item you are looking for.' )
+                    'name' => __( 'YT Players', 'yt-player'),
+                    'singular_name' => __( 'YT Player', 'yt-player' ),
+                    'menu_name' => __('YT Player', 'yt-player'),
+                    'all_items' => __('ShortCode Generator', 'yt-player'),
+                    'add_new' => __('Add New ShortCode', 'yt-player'),
+                    'add_new_item' => __( 'Add new shortCode', 'yt-player' ),
+                    'edit_item' => __( 'Edit', 'yt-player' ),
+                    'new_item' => __( 'New', 'yt-player' ),
+                    'view_item' => __( 'View', 'yt-player' ),
+                    'search_items'       => __( 'Search', 'yt-player'),
+                    'not_found' => __( 'Sorry, we couldn\'t find any item you are looking for.', 'yt-player' )
                 ),
                 'public' => false,
                 'show_ui' => true, 									
                 'publicly_queryable' => true,
                 'exclude_from_search' => true,
                 'menu_position' => 14,
-                'menu_icon' =>YTP_PLUGIN_DIR .'img/icon.png',
+                'menu_icon' => YTP_PLUGIN_DIR .'assets/img/icon.png',
                 'has_archive' => false,
                 'hierarchical' => false,
                 'capability_type' => 'page',
                 'rewrite' => array( 'slug' => 'ytplayer' ),
-                'supports' => array( 'title' )
+                'show_in_rest' => true,
+                'supports' => array( 'title', 'editor' ),
+                'template' => [
+                    ['yt-player/parent']
+                ],
+                'template_lock' => 'all',
             )
         );
     }
@@ -125,28 +135,29 @@ class YTPlayer{
         return $idtions;
     }
 
-    function edit_form_after_title(){
-        global $post;	
-        if($post->post_type== $this->post_type){
-        ?>	
-        <div class="ytp_playlist_shortcode">
-                <div class="shortcode-heading">
-                    <div class="icon"><span class="dashicons dashicons-video-alt3"></span> <?php _e("WP Podcast", "ytp") ?></div>
-                    <div class="text"> <a href="https://bplugins.com/support/" target="_blank"><?php _e("Supports", "ytp") ?></a></div>
-                </div>
-                <div class="shortcode-left">
-                    <h3><?php _e("Shortcode", "ytp") ?></h3>
-                    <p><?php _e("Copy and paste this shortcode into your posts, pages and widget:", "ytp") ?></p>
-                    <div class="shortcode" selectable>[ytplayer id='<?php echo esc_attr($post->ID); ?>']</div>
-                </div>
-                <div class="shortcode-right">
-                    <h3><?php _e("Template Include", "ytp") ?></h3>
-                    <p><?php _e("Copy and paste the PHP code into your template file:", "ytp"); ?></p>
-                    <div class="shortcode">&lt;?php echo do_shortcode('[ytplayer id="<?php echo esc_html($post->ID); ?>"]');
-                    ?&gt;</div>
-                </div>
+    function edit_form_after_title() {
+        global $post;
+        if ($post->post_type == $this->post_type) {
+            $id = $post->ID;
+            $shortcode = "[ytplayer id='" . esc_attr($id) . "']";
+        ?>
+        <div class="ytp_shortcode_box_after_title">
+            <label><?php esc_html_e('Copy and paste this shortcode into your posts, pages and widget', 'yt-player'); ?></label>
+            <div class="shortcode_area">
+                <button class="button button-bplugins button-large ytp_shortcode_copy_btn"
+                        data-shortcode="<?php echo esc_attr($shortcode) ?>"><span class="copy-text"><?php echo esc_html($shortcode); ?></span></button>
+                <svg class='ytp_shortcode_copy_btn' data-type="icon"
+                     data-shortcode='<?php echo esc_attr($shortcode) ?>'
+                     width='22px' height='22px' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                    <path
+                            d='M8 4V16C8 17.1046 8.89543 18 10 18L18 18C19.1046 18 20 17.1046 20 16V7.24162C20 6.7034 19.7831 6.18789 19.3982 5.81161L16.0829 2.56999C15.7092 2.2046 15.2074 2 14.6847 2H10C8.89543 2 8 2.89543 8 4Z'
+                            stroke='#000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
+                    <path d='M16 18V20C16 21.1046 15.1046 22 14 22H6C4.89543 22 4 21.1046 4 20V9C4 7.89543 4.89543 7 6 7H8'
+                          stroke='#000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>
+                </svg>
             </div>
-        <?php   
+        </div>
+        <?php
         }
     }
     
@@ -178,7 +189,7 @@ class YTPlayer{
     
     
     function updated_messages( $messages ) {
-        $messages[$this->post_type][1] = __('updated ');
+        $messages[$this->post_type][1] = __('updated ', 'yt-player');
         return $messages;
     }
 
@@ -190,6 +201,16 @@ class YTPlayer{
                     #misc-publishing-actions,
                     #minor-publishing-actions{
                         display:none;
+                    }
+                    .csf-field-button_set .csf-fieldset > div,
+                    .csf-field-button_set ul {
+                        display: flex !important;
+                        flex-wrap: wrap !important;
+                        gap: 8px !important;
+                    }
+                    .csf-field-button_set label {
+                        margin: 0 !important;
+                        border-radius: 4px !important;
                     }
                 </style>
             ';
@@ -207,36 +228,14 @@ class YTPlayer{
     }
 
     public function forceGutenberg($use, $post) {
-        $gutenberg = (boolean) get_option('pdfp_gutenberg_enable', false);
-        $isGutenberg = (boolean) get_post_meta($post->ID, 'isGutenberg', true);
-        $pluginUpdated = 1630223686;
-        $publishDate = get_the_date('U', $post);
-        $currentTime = current_time("U");
-
-    
         if ($this->post_type === $post->post_type) {
-            if($gutenberg){
-                if($post->post_status == 'auto-draft' ){
-                    update_post_meta($post->ID, 'isGutenberg', true);
-                    return true;
-                }else {
-                    if($isGutenberg || $pluginUpdated < $publishDate){
-                        return true;
-                    }else {
-                        remove_post_type_support($this->post_type, 'editor');
-                        return false;
-                    }
-                }
-            }else {
-                if($isGutenberg){
-                    return true;
-                }else {
-                    remove_post_type_support($this->post_type, 'editor');
-                    return false;
-                }
-            }
+            $gutenberg = (bool) \YTP\Helper\Utils::getOptionDeep('ytp_option', 'gutenbergEnabled', false);
+            if (!$gutenberg) {
+                remove_post_type_support($this->post_type, 'editor');
+                return false;
+            } 
+            return true;
         }
-
         return $use;
     }
 
@@ -248,9 +247,10 @@ class YTPlayer{
     }
 
     public function configure($prefix){
+
         \CSF::createSection($prefix, array(
-            // 'parent' => 'ytp_playerio',
-            'title' => '',
+            'title'  => 'General',
+            'icon'   => 'fas fa-cog',
             'fields' => array(
                 array(
                     'id' => 'source',
@@ -258,6 +258,76 @@ class YTPlayer{
                     'type'  => 'text',
                     'desc' => 'Please submit here YouTube video URL or ID'
                 ),
+                array(
+                    'id' => 'width',
+                    'type' => 'dimensions',
+                    'title' => 'Player Width',
+                    'height' => false,
+                    'default' => [
+                        'unit' => '%',
+                        'width' => 100,
+                    ]
+                ),
+                array(
+                    'id' => 'loop',
+                    'type' => 'switcher',
+                    'title' => 'Repeat',
+                    'desc' => 'On if you want the video play again after the finished duration',
+                    'class' => 'bplugins-meta-readonly',
+                    'default' => '0',
+                ),
+                array(
+                    'id' => 'muted_ignore',
+                    'type' => 'switcher',
+                    'title' => 'Muted',
+                    'desc' => 'On if you want the video output should be muted',
+                    'default' => '0',
+                    'class' => 'bplugins-meta-readonly',
+                ),
+                array(
+                    'id' => 'autoplay_ignore',
+                    'type' => 'switcher',
+                    'title' => 'Auto Play',
+                    'desc' => 'Turn On if you  want video will start playing as soon as it is ready. <a href="https://developers.google.com/web/updates/2017/09/autoplay-policy-changes">autoplay policy</a>',
+                    'class' => 'bplugins-meta-readonly',
+                    'default' => '',
+                ),
+                array(
+                    'id' => 'seekTime_ignore',
+                    'type' => 'number',
+                    'title' => 'Seek Time',
+                    'desc' => 'The time, in seconds, to seek when a user hits fast forward or rewind. Default value is 10 Sec.',
+                    'default' => 10,
+                    'class' => 'bplugins-meta-readonly',
+                ),
+                array(
+                    'id' => 'hideControls_ignore',
+                    'type' => 'switcher',
+                    'title' => 'Auto Hide Control',
+                    'desc' => 'On if you want the controls (such as a play/pause button etc) hide automaticaly.',
+                    'default' => '1',
+                    'class' => 'bplugins-meta-readonly',
+                ),
+                array(
+                    'id' => 'clickToPlay_ignore',
+                    'type' => 'switcher',
+                    'title' => 'Click To Play',
+                    'class' => 'bplugins-meta-readonly',
+                    'default' => '1',
+                ),
+                array(
+                    'id' => 'hideYoutubeUI_ignore',
+                    'class' => 'bplugins-meta-readonly',
+                    'type' => 'switcher',
+                    'title' => 'Hide Youtube UI (Experimental, check it\'s working or not for you)'
+                ),
+            )
+        ));
+
+        \CSF::createSection($prefix, array(
+            'title'  => 'Branding',
+            'icon'   => 'fas fa-paint-brush',
+            'fields' => array(
                 array(
                     'id' => 'brandLogo',
                     'type' => 'switcher',
@@ -313,8 +383,8 @@ class YTPlayer{
                     ),
                     'default'    => 'top-right',
                     'dependency' => array('brandLogo', '==', true),
-                  ),
-                  array(
+                ),
+                array(
                     'id' => 'customThumbnail',
                     'type' => 'switcher',
                     'title' => 'Enable Custom Thumbnail',
@@ -330,6 +400,13 @@ class YTPlayer{
                     'class' => 'bplugins-meta-readonly',
                     'dependency' => array('customThumbnail', '==', true),
                 ),
+            )
+        ));
+
+        \CSF::createSection($prefix, array(
+            'title'  => 'Controls & UI',
+            'icon'   => 'fas fa-sliders-h',
+            'fields' => array(
                 array(
                     'id' => 'controls',
                     'type' => 'button_set',
@@ -346,69 +423,6 @@ class YTPlayer{
                       'fullscreen' => 'Fullscreen'
                     ),
                     'default' => ['play-large', 'play', 'progress', 'duration', 'current-time','mute', 'volume', 'fullscreen']
-                ),
-                array(
-                    'id' => 'loop',
-                    'type' => 'switcher',
-                    'title' => 'Repeat',
-                    'desc' => 'On if you want the video play again after the finished duration',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => '0',
-                ),
-                array(
-                    'id' => 'muted_ignore',
-                    'type' => 'switcher',
-                    'title' => 'Muted',
-                    'desc' => 'On if you want the video output should be muted',
-                    'default' => '0',
-                    'class' => 'bplugins-meta-readonly',
-                ),
-                array(
-                    'id' => 'autoplay_ignore',
-                    'type' => 'switcher',
-                    'title' => 'Auto Play',
-                    'desc' => 'Turn On if you  want video will start playing as soon as it is ready. <a href="https://developers.google.com/web/updates/2017/09/autoplay-policy-changes">autoplay policy</a>',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => '',
-                ),
-                array(
-                    'id' => 'width',
-                    'type' => 'dimensions',
-                    'title' => 'Player Width',
-                    'height' => false,
-                    'default' => [
-                        'unit' => '%',
-                        'width' => 100,
-                    ]
-                ),
-                array(
-                    'id' => 'seekTime_ignore',
-                    'type' => 'number',
-                    'title' => 'Seek Time',
-                    'desc' => 'The time, in seconds, to seek when a user hits fast forward or rewind. Default value is 10 Sec.',
-                    'default' => 10,
-                    'class' => 'bplugins-meta-readonly',
-                ),
-                array(
-                    'id' => 'hideControls_ignore',
-                    'type' => 'switcher',
-                    'title' => 'Auto Hide Control',
-                    'desc' => 'On if you want the controls (such as a play/pause button etc) hide automaticaly.',
-                    'default' => '1',
-                    'class' => 'bplugins-meta-readonly',
-                ),
-                array(
-                    'id' => 'clickToPlay_ignore',
-                    'type' => 'switcher',
-                    'title' => 'Click To Play',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => '1',
-                ),
-                array(
-                    'id' => 'hideYoutubeUI_ignore',
-                    'class' => 'bplugins-meta-readonly',
-                    'type' => 'switcher',
-                    'title' => 'Hide Youtube UI (Experimental, check it\'s working or not for you)'
                 ),
                 array(
                     'id' => 'showThumbnailOnPause',
@@ -482,5 +496,6 @@ class YTPlayer{
             )
         ));
     }
+    
 
 }

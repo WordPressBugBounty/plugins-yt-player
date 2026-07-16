@@ -10,7 +10,7 @@
     "media player",
     "video"
   ],
-  "textdomain": "ytp",
+  "textdomain": "yt-player",
   "attributes": {
     "uniqueId": {
       "type": "string",
@@ -49,8 +49,8 @@
           "videoSource": "https://www.youtube.com/watch?v=aqz-KE-bpKQ&pp=ygUOYmlnIGJ1Y2sgYnVubnk%3D",
           "isCustomThumb": false,
           "videoThumb": "",
-          "heading": "Type Heading",
-          "content": "Synergistically transition optimal experiences through integrated growth strategies. Collaboratively morph covalent communities whereas alternative markets.",
+          "heading": "Modern Video Player",
+          "content": "Watch videos effortlessly with a modern player designed for smooth streaming, intuitive controls, and responsive performance.",
           "border": {
             "width": "5px",
             "style": "solid",

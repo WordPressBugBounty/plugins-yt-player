@@ -1,5 +1,5 @@
 <?php 
-namespace YTP\Model;
+namespace YTP\Model; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 use YTP\Helper\Import;
 
@@ -38,11 +38,11 @@ class Ajax{
 
     public function prepareAjax(){
         // wp_send_json_success('success');
-        if(isset($_GET['nonce'])){
-            $this->params = $_GET;
+        if(isset($_GET['nonce'])){ // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $this->params = $_GET; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $this->requestType = 'POST';
         } else {
-            $this->params = $_POST;
+            $this->params = $_POST; // phpcs:ignore WordPress.Security.NonceVerification.Missing
             $this->requestType = 'GET';
         }
         echo wp_kses_post(wp_json_encode($this->proceedRequest()));

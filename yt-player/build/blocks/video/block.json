@@ -10,7 +10,7 @@
     "media player",
     "video"
   ],
-  "textdomain": "ytp",
+  "textdomain": "yt-player",
   "attributes": {
     "uniqueId": {
       "type": "string",
@@ -42,7 +42,7 @@
       "type": "object",
       "default": {
         "isBrandLogo": false,
-        "brandUrl": "https://img.freepik.com/premium-vector/creative-elegant-abstract-minimalistic-logo-design-vector-any-brand-company_1287271-13351.jpg?semt=ais_hybrid",
+        "brandUrl": "",
         "brandPosition": "top-right"
       }
     },
@@ -66,7 +66,7 @@
       "type": "object",
       "default": {
         "isCustomBanner": false,
-        "bannerUrl": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
+        "bannerUrl": ""
       }
     },
     "chapters": {
@@ -121,7 +121,6 @@
       "default": {
         "controls": [
           "play-large",
-          "restart",
           "rewind",
           "play",
           "fast-forward",
@@ -130,7 +129,6 @@
           "duration",
           "mute",
           "volume",
-          "download",
           "fullscreen"
         ],
         "repeat": false,
@@ -179,7 +177,7 @@
     },
     "hideYoutubeUI": {
       "type": "boolean",
-      "default": false
+      "default": true
     },
     "saveState": {
       "type": "boolean",

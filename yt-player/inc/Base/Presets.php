@@ -1,5 +1,5 @@
 <?php
-namespace YTP\Base;
+namespace YTP\Base; // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 
 use YTP\Model\Presets as PresetModel;
 
