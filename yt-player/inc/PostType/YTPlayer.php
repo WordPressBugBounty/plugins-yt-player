@@ -108,7 +108,7 @@ class YTPlayer{
                 'publicly_queryable' => true,
                 'exclude_from_search' => true,
                 'menu_position' => 14,
-                'menu_icon' => YTP_PLUGIN_DIR .'assets/img/icon.png',
+                'menu_icon' => set_url_scheme( YTP_PLUGIN_DIR . 'assets/img/icon.png' ),
                 'has_archive' => false,
                 'hierarchical' => false,
                 'capability_type' => 'page',

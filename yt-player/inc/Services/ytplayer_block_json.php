@@ -53,7 +53,7 @@ $block = [ // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefi
             "link" => ""
         ],
         "startTime" => 0,
-        "hideYoutubeUI" => $meta('hideYoutubeUI', true, true),
+        "hideYoutubeUI" => $meta('hideYoutubeUI', false, true),
         "saveState" => true,
         "plyrStyle" => [
             "borderRadius" => $meta('roundCorner', 3, false, 'width') . $meta('roundCorner', 'px', false, 'unit'),

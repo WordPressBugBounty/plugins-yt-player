@@ -1,15 +1,15 @@
 {
-  "name": "rajud/yt-player",
-  "autoload": {
-    "psr-4": {
-      "YTP\\": "inc/"
-    }
-  },
-  "authors": [
-    {
-      "name": "shehabulislam",
-      "email": "rajudjp28@gmail.com"
-    }
-  ],
-  "require": {}
-}
+    "name": "rajud/yt-player",
+    "autoload": {
+      "psr-4": {
+        "YTP\\": "inc/"
+      }
+    },
+    "authors": [
+      {
+        "name": "shehabulislam",
+        "email": "rajudjp28@gmail.com"
+      }
+    ],
+    "require": {}
+  }

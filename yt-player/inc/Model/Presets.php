@@ -9,6 +9,8 @@ class Presets {
         global $wpdb;
         $table_name = $wpdb->prefix.$this->table_name;
 
+        $args = array_intersect_key($args, array_flip(['id', 'name', 'preset']));
+
         $args['preset'] = maybe_serialize( $args['preset']);
 
         if(!isset($args['id'])){

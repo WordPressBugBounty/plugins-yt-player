@@ -1,9 +1,9 @@
-=== YT Player – Embed and Customize Video Players ===
-Contributors: bplugins, shehabulislam, noornabi2, abuhayat, freemius
+=== Video Player for YouTube – Embed Videos Your Visitors Will Love to Watch ===
+Contributors: bplugins, abuhayat, freemius, shamim10
 Tags: plyr, Youtube video player, youtube embed, video player, YouTube
-Requires at least: 6.5+
-Tested up to: 7.0
-Stable tag: 2.0.9
+Requires at least: 6.5
+Tested up to: 7.1
+Stable tag: 2.1.0
 Requires PHP: 7.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -18,34 +18,28 @@ A modern, accessible, fully customizable & user-friendly YouTube Video Player fo
 
 Use a simple shortcode to embed YouTube videos without needing iframe codes. Ideal for bloggers, marketers, educators, and anyone looking to add YouTube video to WordPress effortlessly.
 
-=== Key Features –  Free Version ===
+=== Key Features – Free Version ===
 
-- **Easy YouTube Embed with Shortcode** - Paste your YouTube URL inside [ytp]...[/ytp] and place it anywhere — posts, pages, sidebars, or custom templates. No embed code needed.
-- **Works with YouTube Video ID or URL** - Just add the full YouTube link to start playing — no extra setup required.
-- **Fully Responsive Layout** - The player adjusts automatically to fit any screen size — desktop, tablet, or mobile.
-- **Fullscreen Support** - Viewers can switch to full-screen mode, with support for both native and fallback options.
-- **Fast & Lightweight** - Optimized for speed — the player loads quickly and doesn't slow down your page.
-- **Shortcode Anywhere** - Use the shortcode in posts, pages, widget areas, or custom post types to display your video wherever you want.
-- **Toggle Player Controls** - Choose which controls to show or hide, like play, pause, volume, or fullscreen — you’re in control.
-- **Keyboard & Accessibility Support** - Built with accessibility in mind, making navigation easier for all users.
-- **Built with HTML5 and Plyr.js** - Uses the modern HTML5 video standard and the Plyr framework for reliable, consistent playback.
+- **Gutenberg Block Support** - Includes a dedicated 'Video Player for YouTube' Gutenberg block for seamless block editor page building.
+- **Easy YouTube Embed with Shortcode** - Paste your YouTube URL inside [ytp]...[/ytp] or use [ytplayer id="..."] anywhere — posts, pages, sidebars, or custom templates.
+- **Works with YouTube Video ID or URL** - Add either the full YouTube video link or just the 11-character video ID.
+- **Fully Responsive Layout** - Player adjusts automatically to fit desktop, tablet, and mobile screens seamlessly.
+- **Fullscreen & Keyboard Navigation** - Viewers can switch to full-screen mode and navigate easily using keyboard shortcuts.
+- **Fast & Lightweight** - Built with modern HTML5 standard and Plyr framework for optimal page loading performance.
+- **Control Customization** - Choose which controls to show or hide for basic playback.
 
-=== YT Player Pro– Unlock Premium Features ===
+=== YT Player Pro – Unlock Premium Features ===
 
-The [Pro version](https://bplugins.com/products/yt-player/pricing/) offers more control over playback and appearance, giving you greater flexibility in how videos are displayed and customized.
+The [Pro version](https://bplugins.com/products/yt-player/pricing/) offers advanced control over video playback, branding, and layout:
 
-- **Add a Brand Logo on Videos** -  Display your logo as an overlay on the video. You can adjust its position, size, and transparency.
-- **Upload Custom Thumbnails** -  Replace the default YouTube preview with your own image to better match your content or branding.
-- **Auto-Repeat Playback** -  Let your video loop automatically after it ends — ideal for promos or background video.
-- **Show Thumbnail When Paused** -  When the video is paused, a thumbnail image appears instead of a blank screen.
-- **Hide Controls on Pause** -  Create a cleaner look by hiding all controls when the video isn’t playing.
-- **Floating Mini Player While Scrolling** -  Keep the video visible in a small corner player as visitors scroll down the page.
-- **Muted** - Starts video playback with audio turned off by default.
-- **Auto Play** - Automatically starts video playback when the page loads.
-- **Seek Time** - Defines the time interval (in seconds) to skip forward or backward during video playback.
-- **Hide YouTube UI** - Removes default YouTube player controls and branding for a cleaner, distraction-free viewing experience.
-- **Save Preset Design** - Allows users to save customized settings and styles as a preset for quick reuse across multiple layout.
-- **Customize the Player’s Look** -  Fine-tune the player’s appearance — colors, controls, and layout — to match your website style.
+- **Auto Play & Muted Playback** - Automatically start video playback when page loads, with option to start muted by default.
+- **Add a Brand Logo on Videos** - Display your custom logo as an overlay on videos with adjustable position, size, and transparency.
+- **Upload Custom Banner Thumbnails** - Replace default YouTube video previews with your own custom branded cover image.
+- **Floating Mini Player While Scrolling** - Keep the video playing in a sleek floating corner window as visitors scroll down the page.
+- **Custom Seek Time Interval** - Set custom seek time jump intervals (in seconds) for forward and rewind buttons.
+- **Hide Controls on Pause** - Keep the player ultra-clean by hiding control bars when the video is paused.
+- **Hide YouTube UI & Branding** - Hide native YouTube interface elements and branding for a distraction-free experience.
+- **Create & Save Custom Presets** - Save customized player designs and options as presets for instant one-click reuse across your site.
 
 [Try the Pro Version](https://bplugins.com/products/yt-player/pricing/) – Unlock all premium features today!
 
@@ -113,6 +107,14 @@ Please report security bugs found in the source code of the Video Player for You
 
 
 == Changelog ==
+
+= 2.1.0 - 29 Aug, 2026 =
+- **Security**: Hardened preset data handling and AJAX endpoint security.
+- **Security**: Improved data sanitization and permission verification.
+- **Fix**: Resolved quick shortcode [ytp] URL parsing and player style enqueuing.
+- **Fix**: Improved clipboard copy compatibility across HTTP and HTTPS environments.
+- **Fix**: Resolved block editor player controls rendering and SVG icon display.
+- **Update**: Enhanced UI option consistency and Pro field controls.
 
 = 2.0.9 - 16 July, 2026 =
 - **Update**: Freemius SDK update.
@@ -187,6 +189,9 @@ Please report security bugs found in the source code of the Video Player for You
 * Initial Release
 
 == Upgrade Notice ==
+
+= 2.1.0 - 29 Aug, 2026 =
+- Security: General security hardening, data sanitization improvements, and minor fixes.
 
 = 2.0.9 - 16 July, 2026 =
 - Update: Freemius SDK and WP Utils added; fixed plugin dashboard activation and editor block selection issues.

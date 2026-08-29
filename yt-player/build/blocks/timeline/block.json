@@ -1,5 +1,5 @@
 {
-  "apiVersion": "2",
+  "apiVersion": 3,
   "name": "yt-player/timeline",
   "title": "Video player timeline for youtube ",
   "description": "video player timeline for youtube",

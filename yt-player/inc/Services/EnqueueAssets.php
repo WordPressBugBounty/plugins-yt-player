@@ -6,12 +6,18 @@ class EnqueueAssets {
     public function register(){
         add_action('admin_enqueue_scripts', [$this, 'adminAssets']);
         add_action('wp_enqueue_scripts', [$this, 'publicAssets']);
+        add_action('enqueue_block_editor_assets', [$this, 'editorAssets']);
+    }
+
+    public function editorAssets(){
+        wp_enqueue_style( 'ytp-style', YTP_PLUGIN_DIR . 'public/css/plyr-v3.7.8.css', array(), YTP_PLUGIN_VERSION, 'all' );
+        wp_enqueue_script( 'ytp-js', YTP_PLUGIN_DIR  . 'public/js/plyr-v3.7.8.js',[], YTP_PLUGIN_VERSION, true );
     }
 
     public function adminAssets(){
         $page = get_current_screen();
 
-        if($page->post_type === 'ytplayer' || $page->base === 'plugins'){
+        if($page && (isset($page->post_type) && $page->post_type === 'ytplayer' || isset($page->base) && $page->base === 'plugins')){
             wp_enqueue_style('ytp-admin', YTP_PLUGIN_DIR.'assets/css/admin.css', [], YTP_PLUGIN_VERSION);
             wp_enqueue_script('ytp-admin', YTP_PLUGIN_DIR.'assets/js/script.js', [], YTP_PLUGIN_VERSION, true);
 

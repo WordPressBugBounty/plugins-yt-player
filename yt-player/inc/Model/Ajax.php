@@ -19,7 +19,6 @@ class Ajax{
         add_action('wp_ajax_ytp_import_data', [$this, 'ytp_import_data']);
 
         add_action('wp_ajax_ytp_ajax', [$this, 'prepareAjax']);
-        add_action('wp_ajax_nopriv_ytp_ajax', [$this, 'prepareAjax']);
     }
 
     public static function instance(){
@@ -55,6 +54,10 @@ class Ajax{
 
         if(!wp_verify_nonce( $nonce, 'wp_ajax' )){
             return new \WP_Error('invalid', 'invalid nonce');
+        }
+
+        if(!current_user_can('edit_posts')){
+            return new \WP_Error('forbidden', 'permission denied');
         }
 
         $this->requestModel = $this->isset($data, 'model', 'Model');

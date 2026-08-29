@@ -1,5 +1,5 @@
 {
-  "apiVersion": "2",
+  "apiVersion": 3,
   "name": "yt-player/video",
   "title": "Video player for youtube",
   "description": "video player for youtube",
@@ -177,7 +177,7 @@
     },
     "hideYoutubeUI": {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     "saveState": {
       "type": "boolean",
@@ -248,5 +248,8 @@
     "plyrIoJS"
   ],
   "render": "file:./render.php",
-  "editorStyle": "file:./index.css"
+  "editorStyle": [
+    "file:./index.css",
+    "plyrIoCSS"
+  ]
 }

@@ -12,13 +12,19 @@ class EnqueueAssets
 
     function enqueue_block_assets()
     {
-        wp_register_script('plyrio', YTP_PLUGIN_DIR . 'public/js/plyr-v3.7.3.js', [], YTP_PLUGIN_VERSION, true);
-        wp_register_style('plyrio', YTP_PLUGIN_DIR . 'public/css/plyr-v3.7.3.css', [], YTP_PLUGIN_VERSION);
+        wp_register_script('plyrIoJS', YTP_PLUGIN_DIR . 'public/js/plyr-v3.7.8.js', [], YTP_PLUGIN_VERSION, true);
+        wp_register_style('plyrIoCSS', YTP_PLUGIN_DIR . 'public/css/plyr-v3.7.8.css', [], YTP_PLUGIN_VERSION);
 
-        wp_register_style('ytp-blocks', YTP_PLUGIN_DIR . 'dist/blocks.css', ['plyrio'], YTP_PLUGIN_VERSION);
+        wp_register_script('plyrio', YTP_PLUGIN_DIR . 'public/js/plyr-v3.7.8.js', [], YTP_PLUGIN_VERSION, true);
+        wp_register_style('plyrio', YTP_PLUGIN_DIR . 'public/css/plyr-v3.7.8.css', [], YTP_PLUGIN_VERSION);
 
-        wp_register_style('ytp-public', YTP_PLUGIN_DIR . 'dist/public.css', ['plyrio'], YTP_PLUGIN_VERSION);
-        wp_register_script('ytp-public', YTP_PLUGIN_DIR . 'dist/public.js', ['plyrio', 'react', 'react-dom'], YTP_PLUGIN_VERSION, true);
+        wp_enqueue_style('plyrIoCSS');
+        wp_enqueue_script('plyrIoJS');
+
+        wp_register_style('ytp-blocks', YTP_PLUGIN_DIR . 'dist/blocks.css', ['plyrIoCSS'], YTP_PLUGIN_VERSION);
+
+        wp_register_style('ytp-public', YTP_PLUGIN_DIR . 'dist/public.css', ['plyrIoCSS'], YTP_PLUGIN_VERSION);
+        wp_register_script('ytp-public', YTP_PLUGIN_DIR . 'dist/public.js', ['plyrIoJS', 'react', 'react-dom'], YTP_PLUGIN_VERSION, true);
     }
 
 

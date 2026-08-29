@@ -3,6 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 use YTP\Model\Presets;
 
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $ytp_preset = new Presets();
 $id = wp_unique_id('ytPlayer-');
 

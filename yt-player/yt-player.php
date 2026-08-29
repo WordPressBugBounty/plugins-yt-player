@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Plugin Name: Video Player for YouTube
+ * Plugin Name: Video Player for YouTube – Embed Videos Your Visitors Will Love to Watch
  * Plugin URI:  http://bplugins.com
  * Description: A simple, accessible, fully customizable & user friendly YouTube Video Player for Wordpress.
- * Version: 2.0.9
+ * Version: 2.1.0
  * Author: bPlugins
  * Author URI: http://abuhayatpolash.com
  * License: GPLv3
@@ -18,10 +18,13 @@ if ( !defined( 'ABSPATH' ) ) {
 //--------------Fremius Integration------------------
 if ( function_exists( 'ytp_fs' ) ) {
     ytp_fs()->set_basename( false, __FILE__ );
+    return;
 } else {
     // DO NOT REMOVE THIS IF, IT IS ESSENTIAL FOR THE `function_exists` CALL ABOVE TO PROPERLY WORK.
     if ( !function_exists( 'ytp_fs' ) ) {
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
         function ytp_fs() {
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
             global $ytp_fs;
             if ( !isset( $ytp_fs ) ) {
                 // Activate multisite network integration.
@@ -35,6 +38,7 @@ if ( function_exists( 'ytp_fs' ) ) {
                 // } else if ( file_exists( dirname(__FILE__) . '/vendor/freemius-lite/start.php' ) ) {
                 //     require_once dirname(__FILE__) . '/vendor/freemius-lite/start.php';
                 // }
+                // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
                 $ytp_fs = fs_dynamic_init( array(
                     'id'               => '5836',
                     'slug'             => 'yt-player',
@@ -62,50 +66,62 @@ if ( function_exists( 'ytp_fs' ) ) {
         // Init Freemius.
         ytp_fs();
         // Signal that SDK was initiated.
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
         do_action( 'ytp_fs_loaded' );
     }
-    /*Some Set-up*/
+}
+/*Some Set-up*/
+if ( !defined( 'YTP_PLUGIN_DIR' ) ) {
     define( 'YTP_PLUGIN_DIR', plugin_dir_url( __FILE__ ) );
+}
+if ( !defined( 'YTP_DIR_PATH' ) ) {
     define( 'YTP_DIR_PATH', plugin_dir_path( __FILE__ ) );
-    define( 'YTP_PLUGIN_VERSION', ( isset( $_SERVER['HTTP_HOST'] ) && $_SERVER['HTTP_HOST'] === 'localhost' ? time() : '2.0.9' ) );
+}
+if ( !defined( 'YTP_PLUGIN_VERSION' ) ) {
+    define( 'YTP_PLUGIN_VERSION', ( isset( $_SERVER['HTTP_HOST'] ) && $_SERVER['HTTP_HOST'] === 'localhost' ? time() : '2.1.0' ) );
+}
+if ( !defined( 'YTP_IMPORT_VER' ) ) {
     define( 'YTP_IMPORT_VER', '1.0.0' );
-    if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
-        require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+}
+if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
+    require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+}
+require_once plugin_dir_path( __FILE__ ) . 'inc/LicenseActivation.php';
+require_once plugin_dir_path( __FILE__ ) . '/youtube-player.php';
+add_action( 'plugins_loaded', function () {
+    // load_plugin_textdomain('yt-player', false, dirname(plugin_basename(__FILE__)) . '/languages'); // Removed because WP automatically loads translations since 4.6
+    if ( !class_exists( 'CSF' ) ) {
+        require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
+        require_once __DIR__ . '/youtube-player.php';
     }
-    require_once plugin_dir_path( __FILE__ ) . 'inc/LicenseActivation.php';
-    require_once plugin_dir_path( __FILE__ ) . '/youtube-player.php';
-    add_action( 'plugins_loaded', function () {
-        // load_plugin_textdomain('yt-player', false, dirname(plugin_basename(__FILE__)) . '/languages'); // Removed because WP automatically loads translations since 4.6
-        if ( !class_exists( 'CSF' ) ) {
-            require_once __DIR__ . '/vendor/codestar-framework/codestar-framework.php';
-            require_once __DIR__ . '/youtube-player.php';
-        }
-        if ( class_exists( 'YTP\\Init' ) ) {
-            YTP\Init::register_services();
-        }
-    } );
-    add_action( 'init', function () {
-        // import data
-        if ( get_option( 'ytp_import_ver', '0' ) < YTP_IMPORT_VER ) {
-            $players = new WP_Query(array(
-                'post_type'      => 'ytplayer',
-                'post_status'    => 'any',
-                'posts_per_page' => -1,
-            ));
-            while ( $players->have_posts() ) {
-                $players->the_post();
-                $id = get_the_ID();
-                if ( !get_post_meta( $id, 'isGutenberg', true ) ) {
-                    update_post_meta( $id, 'isGutenberg', true );
-                }
+    if ( class_exists( 'YTP\\Init' ) ) {
+        YTP\Init::register_services();
+    }
+} );
+add_action( 'init', function () {
+    // import data
+    if ( get_option( 'ytp_import_ver', '0' ) < YTP_IMPORT_VER ) {
+        $players = new WP_Query(array(
+            'post_type'      => 'ytplayer',
+            'post_status'    => 'any',
+            'posts_per_page' => -1,
+        ));
+        while ( $players->have_posts() ) {
+            $players->the_post();
+            $id = get_the_ID();
+            if ( !get_post_meta( $id, 'isGutenberg', true ) ) {
+                update_post_meta( $id, 'isGutenberg', true );
             }
         }
-    } );
+    }
+} );
+if ( !function_exists( 'ytp_import_btn' ) ) {
+    // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
     function ytp_import_btn(  $links  ) {
         array_unshift( $links, '<a id="ytp_import_btn" href="#">Import</a>' );
         return $links;
     }
 
-    $plugin = plugin_basename( __FILE__ );
-    add_filter( "plugin_action_links_{$plugin}", 'ytp_import_btn' );
 }
+$plugin = plugin_basename( __FILE__ );
+add_filter( "plugin_action_links_{$plugin}", 'ytp_import_btn' );

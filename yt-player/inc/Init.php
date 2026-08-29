@@ -20,7 +20,13 @@ class Init {
         ];
     }
 
+    private static $registered = false;
+
     public static function register_services() {
+        if ( self::$registered ) {
+            return;
+        }
+        self::$registered = true;
         foreach ( self::get_services() as $class ) {
             $services = self::instantiate( $class );
             if ( method_exists( $services, 'register' ) ) {

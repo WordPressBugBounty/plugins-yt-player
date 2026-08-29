@@ -16,24 +16,39 @@ class Shortcode {
             'url' => null,
             'autoplay' => false
         ), $atts ) ); 
+
+        wp_enqueue_style('ytp-style');
+        wp_enqueue_script('ytp-frontend');
+
         Ob_start(); 
     
-        $content=str_replace(' ','', $content); 
-        $id=str_replace('https://www.youtube.com/watch?v=','',$content); 
-        $selector=uniqid();
+        $raw_content = trim(wp_strip_all_tags($content));
+        $video_id = '';
+        if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/s]{11})/', $raw_content, $matches)) {
+            $video_id = $matches[1];
+        } else if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $raw_content)) {
+            $video_id = $raw_content;
+        }
+
+        $selector = uniqid();
         
         $width = Utils::getOptionDeep('ytp_option','width',['width' => 100, 'unit' => '%']);
         $controls = Utils::getOptionDeep('ytp_option', 'controls', []);
         $hideYoutubeUI = Utils::getOptionDeep('ytp_option', 'hideYoutubeUI', false);
+
+        $data_options = [
+            'controls' => is_array($controls) ? array_values($controls) : [],
+            'autoplay' => (bool) $autoplay
+        ];
         
         ?>
         <style>
-            <?php echo esc_html("#player$selector") ?>{
-                max-width: <?php echo esc_html($width['width'].$width['unit']) ?>
-                /* margin: 0 auto; */
+            <?php echo esc_attr("#player$selector"); ?>{
+                width: <?php echo esc_html($width['width'].$width['unit']); ?>;
+                max-width: 100%;
             }
             <?php if($hideYoutubeUI){ ?>
-                <?php echo esc_html("#player$selector"); ?> .plyr__video-wrapper iframe{
+                <?php echo esc_attr("#player$selector"); ?> .plyr__video-wrapper iframe{
                     position: absolute !important;
                     top: -50% !important;
                     height: 200% !important;
@@ -41,26 +56,19 @@ class Shortcode {
             <?php } ?>
         </style>    
         <div>
-            <div id="player<?php echo esc_attr($selector); ?>">
-                <div class="plyr__video-embed embed-container player">
+            <div id="player<?php echo esc_attr($selector); ?>" class="ytp-player" data-options="<?php echo esc_attr(wp_json_encode($data_options)); ?>">
+                <div class="plyr__video-embed embed-container" id="player">
                     <iframe
-                        src="https://www.youtube.com/embed/<?php echo esc_attr($id); ?>"
+                        src="https://www.youtube.com/embed/<?php echo esc_attr($video_id); ?>"
                         allowfullscreen
                         allowtransparency
                         allow="autoplay"
                     ></iframe>
                 </div>
-                <script type="text/javascript">
-                    const player<?php echo esc_html($selector); ?> = new Plyr('#player<?php echo esc_html($selector); ?> .player', {
-                        controls: <?php echo wp_json_encode(  array_values($controls) ) ?>,
-                        youtube: { noCookie: false, rel: 0, showinfo: 0, iv_load_policy: 3, modestbranding: 1, start: 0}  
-                    });
-                </script>
             </div>
         </div>
         <?php 
         $output=ob_get_clean(); return $output; 
-        
     }
 
     public function ytplayer($atts){
