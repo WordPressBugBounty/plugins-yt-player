@@ -73,11 +73,6 @@ class YTPlayer{
             $url = 'https://wordpress.org/support/plugin/yt-player/reviews/#new-post';
             /* translators: 1: Review URL */
             $text = sprintf( wp_kses_post( __( 'If you like <strong>YT Player</strong> please leave us a <a href="%1$s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. Your Review is very important to us as it helps us to grow more. ', 'yt-player' ) ), esc_url( $url ) );
-            ?>
-            <style>
-                .bplugins-meta-readonly { /* pointer-events: none; */ opacity: 0.6; } .csf-field.bplugins-meta-readonly:hover::after { display: block; } .csf-field.bplugins-meta-readonly::before { display: block; width: 100%; height: 100%; content: ""; position: absolute; z-index: 999; overflow: hidden; top: 0; left: 0; } .csf-field.bplugins-meta-readonly::after { display: none; content: "The option is available in the pro version only"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999999; font-size: 22px; background: #673ab7; color: #fff; padding: 10px 13px; border-radius: 3px; }
-            </style>
-            <?php
         }
         return $text;
     }
@@ -246,6 +241,39 @@ class YTPlayer{
         return $translation;
     }
 
+    private function get_pro_badge($text = 'PRO') {
+        return ' <span style="background:#00b2ff;color:#fff;padding:0px 5px;border-radius:4px;font-size:10px;font-weight:bold;margin-left:5px;vertical-align:middle;display:inline-block;line-height:1.4;">' . esc_html($text) . '</span>';
+    }
+
+    public function pro_feature_html($features, $pricing_url = '') {
+        if (empty($pricing_url)) {
+            $pricing_url = admin_url('edit.php?post_type=ytplayer&page=dashboard#/pricing');
+        }
+        $html = '
+        <div class="ytp-pro-notice-box" style="margin-top: 20px; padding: 25px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+            <h4 class="ytp-pro-notice-title" style="margin: 0 0 20px 0; color: #00b2ff; font-size: 18px; display: flex; align-items: center; gap: 10px;">
+                <span>🚀</span> ' . esc_html__('Unlock Pro Features', 'yt-player') . '
+            </h4>
+            <ul class="ytp-pro-notice-list" style="list-style: none; padding: 0; margin: 0 0 25px 0; display: grid; grid-template-columns: repeat(1, 1fr); gap: 15px;">';
+        foreach ($features as $title => $desc) {
+            $html .= '
+                <li style="font-size: 14px; line-height: 1.5; color: #4a5568; display: flex; align-items: baseline; gap: 10px;">
+                    <span style="color: #00b2ff; font-weight: bold; font-size: 12px;">✔</span>
+                    <div>
+                        <strong style="color: #2d3748;">' . esc_html($title) . ':</strong> 
+                        <span style="color: #718096; font-size: 13px;">' . esc_html($desc) . '</span>
+                    </div>
+                </li>';
+        }
+        $html .= '
+            </ul>
+            <div style="display: flex; align-items: center; gap: 15px; border-top: 1px solid #edf2f7; padding-top: 20px;">
+                <a href="' . esc_url($pricing_url) . '" target="_blank" style="background: #00b2ff; color: #fff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px;">' . esc_html__('Upgrade to Pro Now', 'yt-player') . '</a>
+            </div>
+        </div>';
+        return $html;
+    }
+
     public function configure($prefix){
 
         \CSF::createSection($prefix, array(
@@ -256,12 +284,13 @@ class YTPlayer{
                     'id' => 'source',
                     'title' => 'Video URL/ID',
                     'type'  => 'text',
-                    'desc' => 'Please submit here YouTube video URL or ID'
+                    'desc' => 'Enter a valid YouTube video URL or video ID (e.g., https://www.youtube.com/watch?v=... or dQw4w9WgXcQ).'
                 ),
                 array(
                     'id' => 'width',
                     'type' => 'dimensions',
                     'title' => 'Player Width',
+                    'desc' => 'Set the width of the video player container in percentage (%) or pixels (px).',
                     'height' => false,
                     'default' => [
                         'unit' => '%',
@@ -269,137 +298,28 @@ class YTPlayer{
                     ]
                 ),
                 array(
-                    'id' => 'loop',
-                    'type' => 'switcher',
-                    'title' => 'Repeat',
-                    'desc' => 'On if you want the video play again after the finished duration',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => '0',
-                ),
-                array(
-                    'id' => 'muted_ignore',
-                    'type' => 'switcher',
-                    'title' => 'Muted',
-                    'desc' => 'On if you want the video output should be muted',
-                    'default' => '0',
-                    'class' => 'bplugins-meta-readonly',
-                ),
-                array(
-                    'id' => 'autoplay_ignore',
-                    'type' => 'switcher',
-                    'title' => 'Auto Play',
-                    'desc' => 'Turn On if you  want video will start playing as soon as it is ready. <a href="https://developers.google.com/web/updates/2017/09/autoplay-policy-changes">autoplay policy</a>',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => '',
-                ),
-                array(
-                    'id' => 'seekTime_ignore',
-                    'type' => 'number',
-                    'title' => 'Seek Time',
-                    'desc' => 'The time, in seconds, to seek when a user hits fast forward or rewind. Default value is 10 Sec.',
-                    'default' => 10,
-                    'class' => 'bplugins-meta-readonly',
-                ),
-                array(
-                    'id' => 'hideControls_ignore',
-                    'type' => 'switcher',
-                    'title' => 'Auto Hide Control',
-                    'desc' => 'On if you want the controls (such as a play/pause button etc) hide automaticaly.',
-                    'default' => '1',
-                    'class' => 'bplugins-meta-readonly',
-                ),
-                array(
-                    'id' => 'clickToPlay_ignore',
-                    'type' => 'switcher',
-                    'title' => 'Click To Play',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => '1',
-                ),
-                array(
-                    'id' => 'hideYoutubeUI_ignore',
-                    'class' => 'bplugins-meta-readonly',
-                    'type' => 'switcher',
-                    'title' => 'Hide Youtube UI (Experimental, check it\'s working or not for you)'
-                ),
+                    'type'    => 'content',
+                    'content' => $this->pro_feature_html(array(
+                        'Video Loop & Auto Play'      => 'Automatically loop playback and auto-start video when loaded.',
+                        'Default Muted & Seek Time'   => 'Mute audio output by default and customize rewind/fast-forward seek duration.',
+                        'Auto-Hide Controls & Click'  => 'Hide control bar automatically during playback and enable click-to-play.',
+                        'Hide YouTube UI'             => 'Hide default YouTube interface elements for a cleaner video presentation.',
+                    ))
+                )
             )
         ));
 
         \CSF::createSection($prefix, array(
-            'title'  => 'Branding',
+            'title'  => 'Branding' . $this->get_pro_badge(),
             'icon'   => 'fas fa-paint-brush',
             'fields' => array(
                 array(
-                    'id' => 'brandLogo',
-                    'type' => 'switcher',
-                    'title' => 'Enable Brand Logo',
-                    'desc' => 'Turn On to display your brand logo in this video, enhancing brand visibility and recognition.',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => '0',
-                ),
-                array(
-                    'id' => 'logoSource',
-                    'title' => 'Upload Brand Logo',
-                    'type'  => 'upload',
-                    'desc' => 'Insert or Upload here brand logo for show the display in this video',
-                    'class' => 'bplugins-meta-readonly',
-                    'dependency' => array('brandLogo', '==', true),
-                ),
-                array(
-                    'id' => 'brandSize',
-                    'type' => 'dimensions',
-                    'title' => 'Brand Logo Size',
-                    'height' => false,
-                    'default' => [
-                        'unit' => 'px',
-                        'width' => 100,
-                    ],
-                    'dependency' => array('brandLogo', '==', true),
-                    'class' => 'bplugins-meta-readonly',
-                ),
-                array(
-                    'id' => 'radius',
-                    'type' => 'dimensions',
-                    'title' => 'Brand Logo Border Radius',
-                    'height' => false,
-                    'default' => [
-                        'unit' => '%',
-                        'width' => 50,
-                    ],
-                    'dependency' => array('brandLogo', '==', true),
-                    'class' => 'bplugins-meta-readonly',
-                ),
-                array(
-                    'id'      => 'brandLogoPosition',
-                    'type'    => 'select',
-                    'title'   => 'Brand Logo Position',
-                    'desc'    => 'Select the position for the brand logo overlay.',
-                    'class' => 'bplugins-meta-readonly',
-                    'options' => array(
-                      'top-left'      => 'Top Left',
-                      'top-right'     => 'Top Right',
-                      'bottom-left'   => 'Bottom Left',
-                      'bottom-right'  => 'Bottom Right',
-                      'center-center' => 'Center Center',
-                    ),
-                    'default'    => 'top-right',
-                    'dependency' => array('brandLogo', '==', true),
-                ),
-                array(
-                    'id' => 'customThumbnail',
-                    'type' => 'switcher',
-                    'title' => 'Enable Custom Thumbnail',
-                    'desc' => 'Turn On to display your custom thumbnail in this video, enhancing brand visibility and recognition.',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => '0',
-                ),
-                array(
-                    'id' => 'thumbnailSource',
-                    'title' => 'Upload Custom Thumbnail',
-                    'type'  => 'upload',
-                    'desc' => 'Upload here thumbnail for show the display in this video',
-                    'class' => 'bplugins-meta-readonly',
-                    'dependency' => array('customThumbnail', '==', true),
-                ),
+                    'type'    => 'content',
+                    'content' => $this->pro_feature_html(array(
+                        'Custom Brand Logo Overlay' => 'Display your custom brand logo on top of the video with flexible positioning, width, and border radius.',
+                        'Custom Video Thumbnail'    => 'Replace default YouTube poster images with your own custom uploaded thumbnail banner.',
+                    ))
+                )
             )
         ));
 
@@ -411,6 +331,7 @@ class YTPlayer{
                     'id' => 'controls',
                     'type' => 'button_set',
                     'title' => 'Controls',
+                    'desc' => 'Select control bar elements to display in the player.',
                     'multiple' => true,
                     'options' => array(
                       'play-large' => 'Play Large',
@@ -422,76 +343,15 @@ class YTPlayer{
                       'volume' => 'Volume Control',
                       'fullscreen' => 'Fullscreen'
                     ),
-                    'default' => ['play-large', 'play', 'progress', 'duration', 'current-time','mute', 'volume', 'fullscreen']
+                    'default' => ['play-large', 'play', 'progress', 'duration', 'current-time', 'mute', 'volume', 'fullscreen']
                 ),
                 array(
-                    'id' => 'showThumbnailOnPause',
-                    'type' => 'switcher',
-                    'title' => 'Show Thumbnail On Pause',
-                    'desc' => 'On if you want show the thumbnail when you video on pause.',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => '0',
-                ),
-                array(
-                    'id' => 'hideControlsWhenPause',
-                    'type' => 'switcher',
-                    'title' => 'Hide Controls in Pause',
-                    'default' => '0',
-                    'class' => 'bplugins-meta-readonly',
-                ),
-                array(
-                    'id' => 'roundCorner',
-                    'type' => 'dimensions',
-                    'title' => 'Video Player Corner',
-                    'height' => false,
-                    'desc' => 'You set here the round corner for the video player.',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => [
-                        'unit' => 'px',
-                        'width' => 3,
-                    ]
-                ),
-                array(
-                    'id' => 'playButtonCorner',
-                    'type' => 'dimensions',
-                    'title' => 'Play Button Corner',
-                    'height' => false,
-                    'desc' => 'You set here the round corner for the play button.',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => [
-                        'unit' => '%',
-                        'width' => 50,
-                    ]
-                ),
-                array(
-                    'id' => 'playButtonPadding',
-                    'type' => 'dimensions',
-                    'title' => 'Padding',
-                    'height' => false,
-                    'desc' => 'You set here the padding for the play button.',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => [
-                        'unit' => 'px',
-                        'width' => 15,
-                    ]
-                ),
-                array(
-                    'id' => 'playIconSize',
-                    'type' => 'dimensions',
-                    'title' => 'Play Icon Size',
-                    'height' => false,
-                    'desc' => 'You set here the size of the play icon.',
-                    'class' => 'bplugins-meta-readonly',
-                    'default' => [
-                        'unit' => 'px',
-                        'width' => 25,
-                    ]
-                ),
-                array(
-                    'id'    => 'background',
-                    'type'  => 'color',
-                    'class' => 'bplugins-meta-readonly',
-                    'title' => 'Play Button Background',
+                    'type'    => 'content',
+                    'content' => $this->pro_feature_html(array(
+                        'Restart, Rewind & Fast Forward Controls' => 'Add restart, rewind, and fast-forward buttons to the control bar.',
+                        'Pause State Controls'                    => 'Display custom thumbnail image or hide control bar when video is paused.',
+                        'Custom Player & Button Styling'          => 'Set custom corner radius for the player and adjust play button color, icon size, padding, and border radius.',
+                    ))
                 )
             )
         ));

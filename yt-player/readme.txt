@@ -3,7 +3,7 @@ Contributors: bplugins, abuhayat, freemius, shamim10
 Tags: plyr, Youtube video player, youtube embed, video player, YouTube
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 Requires PHP: 7.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -71,6 +71,36 @@ https://youtu.be/NGvVtSXcZK4
 - [3D Viewer](https://bplugins.com/products/3d-viewer/) – Display interactive 3D models on the webs.
 
 
+== Source Code ==
+
+You can find the source code, report bugs, and contribute to the development of this plugin on our GitHub repository: 
+[**YT Player on GitHub**](https://github.com/bPlugins/yt-player-free)
+
+== Third-Party Libraries ==
+
+This plugin bundles the following third-party JavaScript/PHP libraries.
+
+= Codestar Framework =
+
+* **Source:** [http://codestarframework.com/](http://codestarframework.com/)
+* **GitHub:** [https://github.com/Codestar/codestar-framework](https://github.com/Codestar/codestar-framework)
+* **License:** GPLv2 or later – [https://github.com/Codestar/codestar-framework/blob/master/LICENSE.md](https://github.com/Codestar/codestar-framework/blob/master/LICENSE.md)
+* **Purpose:** Provides the options framework for the plugin's settings and shortcode generator.
+
+= Freemius SDK =
+
+* **Source:** [https://freemius.com/](https://freemius.com/)
+* **GitHub:** [https://github.com/Freemius/wordpress-sdk](https://github.com/Freemius/wordpress-sdk)
+* **License:** GPLv3 – [https://github.com/Freemius/wordpress-sdk/blob/master/LICENSE.txt](https://github.com/Freemius/wordpress-sdk/blob/master/LICENSE.txt)
+* **Purpose:** Provides opt-in usage tracking and analytics to help improve the plugin.
+
+= bpl-tools =
+* Source / GitHub: https://github.com/bPlugins/bpl-tools
+* License: GPL-2.0-or-later – https://www.gnu.org/licenses/gpl-2.0.html
+* Purpose: Shared utility library providing admin dashboard components and common Gutenberg editor controls.
+* External Services: The library may connect to bPlugins, WordPress.org, and Freemius services for product data and checkout functionality. See full details: https://github.com/bPlugins/bpl-tools#external-requests--why-they-are-made
+
+
 == Frequently Asked Questions ==
 
 = How do I install this plugin? =
@@ -107,6 +137,18 @@ Please report security bugs found in the source code of the Video Player for You
 
 
 == Changelog ==
+
+= 2.1.1 - 6 Sep, 2026 =
+- **Security**: Hardened player data attributes, shortcode parameters, and AJAX endpoints against XSS with enhanced sanitization and escaping.
+- **Fix**: Aligned Gutenberg Preset modal controls with Admin Settings — locked Pro controls (Restart, Rewind, Fast Forward, Play Large) in Free mode and displayed upgrade notices.
+- **Fix**: Cleaned up default player control schema to exclude Pro controls by default on Free player instances.
+- **Fix**: Resolved `hideYoutubeUI` boolean evaluation (`"false"` / `"0"` string handling) to prevent accidental YouTube UI hiding and iframe cropping.
+- **Fix**: Enforced strict server-side and client-side Pro feature filtering across player preview, block editor, shortcode, and frontend rendering.
+- **Fix**: Separated preset overlay background color priority from global admin brand color for accurate custom background rendering.
+- **Update**: Enhanced dynamic license status checking to seamlessly unlock Pro controls upon activation without requiring page reloads.
+- **UI/UX**: Reorganized Block Editor inspector sidebar panel titles with intuitive naming ("Basic Settings", "Player Controls", "Preset Controls").
+- **UI/UX**: Standardized PRO badge styling and feature notice card layouts across settings panels and preset modals.
+- **Maintenance**: Cleaned up default preset schemas and removed deprecated source files.
 
 = 2.1.0 - 29 Aug, 2026 =
 - **Security**: Hardened preset data handling and AJAX endpoint security.
@@ -187,11 +229,3 @@ Please report security bugs found in the source code of the Video Player for You
 
 = 1.0 =
 * Initial Release
-
-== Upgrade Notice ==
-
-= 2.1.0 - 29 Aug, 2026 =
-- Security: General security hardening, data sanitization improvements, and minor fixes.
-
-= 2.0.9 - 16 July, 2026 =
-- Update: Freemius SDK and WP Utils added; fixed plugin dashboard activation and editor block selection issues.

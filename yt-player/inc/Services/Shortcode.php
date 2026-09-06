@@ -91,7 +91,10 @@ class Shortcode {
         }
         
         Ob_start(); 
-        $option['controls'] = $option['controls']; //array_diff($option['controls'], ['restart', 'rewind', 'fast-forward', 'current-time']);
+        $is_premium = function_exists('ytp_fs') && ytp_fs()->can_use_premium_code();
+        if (isset($option['controls']) && is_array($option['controls'])) {
+            $option['controls'] = $is_premium ? $option['controls'] : array_values(array_diff($option['controls'], ['restart', 'rewind', 'fast-forward']));
+        }
         $width = $option['width']['width']. $option['width']['unit'];
        
         wp_enqueue_style('ytp-style');

@@ -38,9 +38,13 @@ class Video {
 
         ob_start();
 
+        $is_premium = function_exists('ytp_fs') && ytp_fs()->can_use_premium_code();
+        $is_hide_youtube_ui = $is_premium && isset($hideYoutubeUI) && $hideYoutubeUI !== false && $hideYoutubeUI !== 'false' && $hideYoutubeUI !== '0' && $hideYoutubeUI !== 0;
+        $is_hide_controls_pause = isset($hideControlsWhenPause) && $hideControlsWhenPause !== false && $hideControlsWhenPause !== 'false' && $hideControlsWhenPause !== '0' && $hideControlsWhenPause !== 0;
+
         $classes = "ytPlayer ytWrapper align ";
-        $classes .= isset($hideYoutubeUI) ? ($hideYoutubeUI ? ' hideYoutubeUI' : '') : '';
-        $classes .= isset($hideControlsWhenPause) ? ($hideControlsWhenPause ? ' hideControlsWhenPause' : '') : '';
+        $classes .= $is_hide_youtube_ui ? ' hideYoutubeUI' : '';
+        $classes .= $is_hide_controls_pause ? ' hideControlsWhenPause' : '';
 
         ?>
         <div id=<?php echo esc_attr($uniqueId) ?> class="ytPlayer align" data-attributes="<?php echo esc_attr(wp_json_encode($attrs)); ?>"  data-preset="<?php echo esc_attr(wp_json_encode($preset ?? [])) ?>">

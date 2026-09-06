@@ -12,15 +12,35 @@ class Settings {
     }
 
     public function admin_head_css() {
-        $screen = get_current_screen();
-        if ($screen && strpos($screen->id, 'ytp_options') !== false) {
-            echo '<style>
-                .bplugins-meta-readonly { opacity: 0.6; position: relative; } 
-                .csf-field.bplugins-meta-readonly:hover::after { display: block; } 
-                .csf-field.bplugins-meta-readonly::before { display: block; width: 100%; height: 100%; content: ""; position: absolute; z-index: 999; overflow: hidden; top: 0; left: 0; } 
-                .csf-field.bplugins-meta-readonly::after { display: none; content: "The option is available in the pro version only"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999999; font-size: 22px; background: #673ab7; color: #fff; padding: 10px 13px; border-radius: 3px; }
-            </style>';
+    }
+
+    public function pro_feature_html($features, $pricing_url = '') {
+        if (empty($pricing_url)) {
+            $pricing_url = admin_url('edit.php?post_type=ytplayer&page=dashboard#/pricing');
         }
+        $html = '
+        <div class="ytp-pro-notice-box" style="margin-top: 20px; padding: 25px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+            <h4 class="ytp-pro-notice-title" style="margin: 0 0 20px 0; color: #00b2ff; font-size: 18px; display: flex; align-items: center; gap: 10px;">
+                <span>🚀</span> ' . esc_html__('Unlock Pro Features', 'yt-player') . '
+            </h4>
+            <ul class="ytp-pro-notice-list" style="list-style: none; padding: 0; margin: 0 0 25px 0; display: grid; grid-template-columns: repeat(1, 1fr); gap: 15px;">';
+        foreach ($features as $title => $desc) {
+            $html .= '
+                <li style="font-size: 14px; line-height: 1.5; color: #4a5568; display: flex; align-items: baseline; gap: 10px;">
+                    <span style="color: #00b2ff; font-weight: bold; font-size: 12px;">✔</span>
+                    <div>
+                        <strong style="color: #2d3748;">' . esc_html($title) . ':</strong> 
+                        <span style="color: #718096; font-size: 13px;">' . esc_html($desc) . '</span>
+                    </div>
+                </li>';
+        }
+        $html .= '
+            </ul>
+            <div style="display: flex; align-items: center; gap: 15px; border-top: 1px solid #edf2f7; padding-top: 20px;">
+                <a href="' . esc_url($pricing_url) . '" target="_blank" style="background: #00b2ff; color: #fff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px;">' . esc_html__('Upgrade to Pro Now', 'yt-player') . '</a>
+            </div>
+        </div>';
+        return $html;
     }
 
     function action_init() {
@@ -52,36 +72,6 @@ class Settings {
    
 
     function quickPlayer(){
-        $is_pro = function_exists('ytp_fs') && ytp_fs()->can_use_premium_code();
-
-        $seekTime_field = array(
-            'id'      => $is_pro ? 'seekTime' : 'seekTime_ignore',
-            'type'    => 'number',
-            'title'   => 'Seek Time',
-            'desc'    => 'The time, in seconds, to seek when a user hits fast forward or rewind. Default value is 10 Sec.',
-            'default' => 10,
-        );
-
-        $hideControls_field = array(
-            'id'      => $is_pro ? 'hideControls' : 'hideControls_ignore',
-            'type'    => 'switcher',
-            'title'   => 'Auto Hide Control',
-            'desc'    => 'On if you want the controls (such as a play/pause button etc) hide automaticaly.',
-            'default' => '1',
-        );
-
-        $hideYoutubeUI_field = array(
-            'id'    => $is_pro ? 'hideYoutubeUI' : 'hideYoutubeUI_ignore',
-            'type'  => 'switcher',
-            'title' => 'Hide Youtube UI (Experimental, check it\'s working or not for you)'
-        );
-
-        if (!$is_pro) {
-            $seekTime_field['class']      = 'bplugins-meta-readonly';
-            $hideControls_field['class']  = 'bplugins-meta-readonly';
-            $hideYoutubeUI_field['class'] = 'bplugins-meta-readonly';
-        }
-
         \CSF::createSection($this->prefix, array(
             // 'parent' => 'ytp_playerio',
             'title' => 'Quick Player',
@@ -102,36 +92,40 @@ class Settings {
                     'id' => 'controls',
                     'type' => 'button_set',
                     'title' => 'Controls',
+                    'desc' => 'Select control bar elements to display in the player.',
                     'multiple' => true,
                     'options' => array(
                       'play-large' => 'Play Large',
-                      'restart' => 'Restart',
-                      'rewind' => 'Rewind',
                       'play' => 'Play',
-                      'fast-forward' => 'Fast Forwards',
                       'progress' => 'Progressbar',
                       'duration' => 'Duration',
                       'current-time' => 'Current Time',
                       'mute' => 'Mute Button',
                       'volume' => 'Volume Control',
-                      'settings' => 'Setting Button',
                       'fullscreen' => 'Fullscreen'
                     ),
-                    'default' => ['play-large', 'rewind', 'play', 'fast-forward', 'progress', 'duration', 'current-time','mute', 'volume', 'settings', 'fullscreen']
+                    'default' => ['play-large', 'play', 'progress', 'duration', 'current-time', 'mute', 'volume', 'fullscreen']
                 ),
                 array(
                     'id' => 'width',
                     'type' => 'dimensions',
                     'title' => 'Player Width',
+                    'desc' => 'Set player container width in percentage (%) or pixels (px).',
                     'height' => false,
                     'default' => [
                         'unit' => '%',
                         'width' => 100,
                     ]
                 ),
-                $seekTime_field,
-                $hideControls_field,
-                $hideYoutubeUI_field
+                array(
+                    'type'    => 'content',
+                    'content' => $this->pro_feature_html(array(
+                        'Restart, Rewind & Fast Forward Controls' => 'Add restart, rewind, and fast-forward buttons to the control bar.',
+                        'Custom Seek Time'    => 'Set custom seek duration in seconds when rewinding or fast forwarding.',
+                        'Auto Hide Control'   => 'Automatically hide player control bar during video playback.',
+                        'Hide YouTube UI'     => 'Hide default YouTube interface and branding elements.',
+                    ))
+                )
             ),
         ));
     }

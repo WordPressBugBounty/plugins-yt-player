@@ -22,25 +22,18 @@ if (!class_exists('YTPPlugin')) {
         {
             // register_block_type(__DIR__ . '/build/blocks/youtube-player');
             register_block_type(__DIR__ . '/build/blocks/video');
-            register_block_type(__DIR__ . '/build/blocks/timeline');
             register_block_type(__DIR__ . '/build/blocks/parent');
 
-            wp_localize_script('yt-player-video-editor-script', 'ytpPlayer', [
+            $localized_data = [
                 'ajaxURL' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('wp_ajax'),
-                'is_premium' => (bool) ytp_fs()->can_use_premium_code(),
-            ]);
+                'is_premium' => false,
+                'brandColor' => \YTP\Helper\Utils::getOptionDeep('ytp_option', 'brandColor', '#00AFFA'),
+            ];
+
+            wp_localize_script('yt-player-video-editor-script', 'ytpPlayer', $localized_data);
+            wp_localize_script('yt-player-parent-editor-script', 'ytpPlayer', $localized_data);
         }
     }
     new YTPPlugin();
-  
-    if ( ytp_fs()->can_use_premium_code() ) {
-        require_once YTP_DIR_PATH . 'inc/LicenseActivation.php';
-    }
-
-     if('yt-player-premium/youtube-player.php' === plugin_basename(__FILE__)) {
-         require_once YTP_DIR_PATH . 'inc/LicenseActivation.php';
-    }
-
-
 }

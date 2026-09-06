@@ -6,6 +6,10 @@ class Presets {
     protected $table_name = 'yt_player_presets';
 
     public function createOrUpdate($args){
+        if(!current_user_can('manage_options')){
+            return new \WP_Error('forbidden', 'permission denied');
+        }
+
         global $wpdb;
         $table_name = $wpdb->prefix.$this->table_name;
 
@@ -25,7 +29,15 @@ class Presets {
     public function get($id){
         global $wpdb;
         $table_name = $wpdb->prefix.$this->table_name;
-        $result = $wpdb->get_row($wpdb->prepare( "SELECT * FROM $table_name WHERE id = %d", $id)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        $result = $wpdb->get_row($wpdb->prepare( "SELECT * FROM $table_name WHERE id = %d", intval($id))); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+
+        if (!$result && !empty($id)) {
+            $result = $wpdb->get_row($wpdb->prepare( "SELECT * FROM $table_name WHERE name = %s", $id)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        }
+
+        if (!$result) {
+            $result = $wpdb->get_row("SELECT * FROM $table_name ORDER BY id ASC LIMIT 1"); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        }
 
         if(!$result){
             return [];
@@ -44,6 +56,10 @@ class Presets {
     }
 
     function deletePreset($args){
+        if(!current_user_can('manage_options')){
+            return new \WP_Error('forbidden', 'permission denied');
+        }
+
         global $wpdb;
         $table_name = $wpdb->prefix.$this->table_name;
         return $wpdb->delete($table_name, ['id' => $args['id']]); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching

@@ -1,10 +1,11 @@
 <?php
-
 // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound
 namespace YTP;
 
-class Init {
-    public static function get_services() {
+
+class Init{
+
+    public static function get_services(){
         return [
             Page\Dashboard::class,
             PostType\YTPlayer::class,
@@ -16,30 +17,34 @@ class Init {
             Base\EnqueueAssets::class,
             Model\Ajax::class,
             Database\Init::class,
-            Base\Presets::class
+            Base\Presets::class,
         ];
     }
 
     private static $registered = false;
 
-    public static function register_services() {
-        if ( self::$registered ) {
+    public static function register_services(){
+        if (self::$registered) {
             return;
         }
         self::$registered = true;
-        foreach ( self::get_services() as $class ) {
-            $services = self::instantiate( $class );
-            if ( method_exists( $services, 'register' ) ) {
+
+        foreach(self::get_services() as $class){
+            $services = self::instantiate($class);
+            if(method_exists($services, 'register')){
                 $services->register();
             }
         }
+
     }
 
-    private static function instantiate( $class ) {
-        if ( class_exists( $class ) ) {
+    private static function instantiate($class){
+        if(class_exists($class)){
             return new $class();
         }
+        
         return new \stdClass();
     }
-
 }
+
+
