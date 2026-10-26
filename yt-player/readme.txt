@@ -3,16 +3,16 @@ Contributors: bplugins, abuhayat, freemius, shamim10
 Tags: plyr, Youtube video player, youtube embed, video player, YouTube
 Requires at least: 6.5
 Tested up to: 7.1
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 Requires PHP: 7.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-A modern, accessible, fully customizable & user-friendly YouTube Video Player for WordPress
+A modern, accessible, fully customizable & user-friendly YouTube Video Player for WordPress.
 
 == Description ==
 
-[YT Player](https://bplugins.com/products/yt-player/) | [Pricing](https://bplugins.com/products/yt-player/pricing/) | [Support](https://bplugins.com/support/) | [Demo](https://bplugins.com/products/yt-player/#demos)
+[YT Player](https://bplugins.com/products/yt-player/) | [Documentation](https://bplugins.com/docs/yt-player) | [Pricing](https://bplugins.com/products/yt-player/pricing/) | [Support](https://bplugins.com/support/) | [Demo](https://bplugins.com/products/yt-player/#demos)
 
 [YT Player](https://bplugins.com/products/yt-player/) is a modern, lightweight, and fully customizable YouTube video player built for WordPress. Whether you're adding a single video or creating a video-rich experience across posts, pages, or widget areas, this plugin makes it easy to embed YouTube videos with a sleek, accessible interface powered by HTML5 and the Plyr framework.
 
@@ -137,6 +137,9 @@ Please report security bugs found in the source code of the Video Player for You
 
 
 == Changelog ==
+
+= 2.1.3 - 26 Oct, 2026 =
+- **Security**: Fixed broken access control in the legacy data import AJAX action — removed unauthenticated access and added nonce verification and an administrator capability check.
 
 = 2.1.2 - 22 Sep, 2026 =
 - **Security**: Added a missing capability check to the preset read endpoint so only administrators can retrieve saved preset configurations, matching the create/delete actions.
